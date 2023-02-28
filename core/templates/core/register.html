@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %} 
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="ico" href="{% static './favicon.ico' %}">
+
+    <title>Register</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Open+Sans:wght@400;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'core/css/style.css' %}">
+    <script src="{% static 'core/js/register.js' %}"></script>
+</head>
+<body>
+    <form class="modal active" novalidate action="/register/" method="post" id="RegisterForm">
+        {% csrf_token %}
+        <div class="title">Register</div>
+        <div class="container">
+            <div class="slide 1 active">
+                <div class="RegisterUserDisplay">
+
+                    <div class="Picture">
+                        <img src="https://www.iconexperience.com/_img/o_collection_png/green_dark_grey/256x256/plain/user.png" alt="" class="ProfilePicture">
+                        <input type="file" name="ProfilePicture" class="ProfilePictureInput" accept="image/x-png,image/gif,image/jpeg">
+                    </div>
+                    <div class="DisplayNameAndUsername">
+                        <div><input type="text" name="DisplayName" placeholder="Display Name" max-length="20" id='First_nameInput' required></div>
+                        <div class="UsernameInput">
+                            <div>@</div>
+                            <input type="text" name="Username" placeholder="Username" id="UsernameInput" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="error" id="First_nameNotValid"> First name is not valid</div>
+                <div class="error" id="UsernameNotValid"> The username has to contain at least one character, and can only have letters, numbers, '.' and '_'</div>
+                <div class="error" id="UsernameAlreadyExists"> There is already an user with this username</div>
+            </div>
+            <div class="slide 2">
+                <div class="RegisterUserPassword">
+                    <label for="password1">Password:</label>
+                    <input type="password" name="password1" id="password1">
+                    <label for="password2">Password (again):</label>
+                    <input type="password" name="password2" id="password2">
+                </div>
+                <div class="error" id="Password1NotValid">Passwords' length have to be grater than 8</div>
+                <div class="error" id="Password2NotValid">Passwords don't match</div>
+            </div>
+            <div class="slide 3">
+                Hm... He might have to check that everything is done correctly
+                <input type="submit" value="Check!">
+            </div>
+        </div>
+        <div class="modalButtons">
+            <input type="button" class="btn btnPurple disabled" id="BackBtn" value="Back">
+            <input type="button" class="btn btnPurple" id="NextBtn" value="Next">
+        </div>
+    </form>
+</body>
+</html>

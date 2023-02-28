@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %} 
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="ico" href="{% static './favicon.ico' %}">
+    <title>Jelly! Different to others</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Open+Sans:wght@400;800&display=swap"
+    rel="stylesheet">
+    <script src="https://kit.fontawesome.com/cafc3d14ff.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static 'core/css/style.css' %}">
+    <script src="{% static 'core/js/homepage.js' %}"></script>
+
+</head>
+<body id="homepage">
+    <div class="header">
+        <img src="{% static 'core/images/Jelly.png' %}" alt="" class="logo">
+        <div class="container">
+            <div class="title">Jelly</div>
+            <div>Unlike other fish in the sea</div>
+        </div>
+        <a href="/register/">Open Jelly</a>
+    </div>
+
+    <div class="wrapper" id="wrapper">
+        <div class="scrollTopDiv"></div>
+        <div class="banner">
+            <div class="bannerForm">
+                <input type="text" placeholder="Anything you write here is private :)" name="" id="">
+                <div class="fa-solid fa-paper-plane"></div>
+            </div>
+        </div>
+        <!--<div class="newsWrapper">
+            <div class="news">
+                <div class="title">Unlike other fish in the sea...</div>
+                <div class="content">
+                    <img src="News1Image.jpg" alt=""width>
+                    <div>
+                        That right there is Jelly. Different to others.
+
+                        Jelly brings to life the idea we all thought for. A chat app, with no data collection. *
+                    </div>
+                </div>
+            </div>
+            <!--<div class="news right">
+                Jelly, the new messages app, claims to not collect data from users, as well
+                as protect their messages, unlike other messaging apps
+
+            </div>-->
+        </div>
+        <div class="infoWrapper" id="infoWrapper">
+
+            <div class="info" id="info1">
+                <div class="content">
+                    <img src="{% static 'core/images/JellyImage.png' %}" alt="">
+                    <div>
+                        <div class="title">Unlike other fish in the sea...</div>
+                        <div>
+                            That right there is Jelly. Different to others.
+
+                            Jelly brings to life the idea we all thought for. A chat app, with no data collection
+                        </div>
+                    </div>            
+                </div>
+            </div>
+
+            <div class="info" id="info2">
+                <div class="title">Features?</div>
+                <div class="content">
+                    <div>
+                        Jelly offers users a wide set of features, but also offers them the possibility to suggest new ones.
+
+                        Moreover, if you are a developer, you can go to our github page and code one!
+                    </div>
+                </div>
+            </div>
+
+            <div class="info" id="info3">
+                <div class="content">
+                    <div class="title">About the developer</div>
+                    <div>
+                        Mr.Goose is a full stack developer, with 4 years experience in Python, JavaScript, HTML, CSS and more. 
+
+                        That being said, Jelly might be subject to change as the developer's experience grows.
+
+                        We're improving!
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="ready title ">Are you <div class="readyText">ready</div>?</div>
+        * Jelly only uses cookies to keep you logged in
+        
+    </div>
+</body>
+</html>
