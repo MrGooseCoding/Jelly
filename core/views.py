@@ -24,7 +24,7 @@ def homepage(request):
     return render(request, template_name='core/homepage.html')
 
 class app(TemplateView):
-    template_name = "app.html"
+    template_name = "index.html"
 
     def get(self, request):
         #try:
