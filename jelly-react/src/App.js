@@ -144,6 +144,7 @@ class App extends React.Component {
 
   onChatCreate = (chatData) => {
     this.setState({Chats: [...this.state.Chats, chatData]})
+    this.toggleCreateChatModal()
   }  
 
   toggleCreateChatModal = () => {
