@@ -105,6 +105,7 @@ class ChatViewSet(ModelViewSet):
         print(json.loads(request.data['chat'])['members'])
         print('User:')
         print(request.user.username)
+        account = Account.objects.get(user__username=request.user.username)
         chatData = {"members": [], "name": data['name'], "description": data['description'], "image": None} 
 
         for username in data['members']:
@@ -124,6 +125,7 @@ class ChatViewSet(ModelViewSet):
         chat = Chat(name=chatData['name'], description=chatData['description'], image=chatData['image'])
         chat.save()
         chat.members.set(chatData['members'])
+        chat.admins.set([account])
         return Response({'data': ChatSerializer(chat).data})
 
     @action(detail=True)

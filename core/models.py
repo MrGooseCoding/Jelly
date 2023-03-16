@@ -23,6 +23,7 @@ class Chat(models.Model):
     name = models.CharField(max_length=42, blank=True)
     description = models.CharField(max_length=100, blank=True, null=True)  #Blank and null are true because there are some chats old that dont have description 
     members = models.ManyToManyField(Account)
+    admins = models.ManyToManyField(Account, related_name='chat_admins')
     image = models.ImageField(upload_to=get_image_path, blank=True, null=True)
 
     def __str__(self):
