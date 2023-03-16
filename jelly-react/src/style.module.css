@@ -327,14 +327,41 @@ pre {
   border-right-style: inset;
   border-width: 1px;
   width: 30vw;
+  /*.title {
+    font-family: "Abril Fatface";
+    font-size: xx-large;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    height: 51px;
+  }*/
 }
 
-.Sidebar .title {
-  font-family: "Abril Fatface";
-  font-size: xx-large;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  height: 51px;
+.Sidebar .top {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 60px;
+  width: calc(30vw - 21px);
+  padding-bottom: 10px;
+}
+
+.Sidebar .top .title {
+  font-size: xxx-large;
+}
+
+.Sidebar .top img {
+  float: right;
+  margin-top: 10px;
+  margin-left: auto;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.Sidebar .top img:hover {
+  -webkit-box-shadow: 0 0 10px 2px #0000004b;
+          box-shadow: 0 0 10px 2px #0000004b;
 }
 
 .Sidebar .SidebarInputContainer {
@@ -404,26 +431,31 @@ pre {
 }
 
 .Main .Header {
-  border-radius: 10px 10px;
-  -webkit-box-shadow: 0.25px 0.25px 5px #0000004b;
-          box-shadow: 0.25px 0.25px 5px #0000004b;
-  margin-left: auto;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  top: 10px;
-  right: 10px;
+  width: calc(70vw - 20px);
   position: absolute;
-  background-color: #2e2f35;
-  height: 51px;
+  padding-top: 22.5px;
+  padding-left: 10px;
+  padding-bottom: 22.5px;
+  border-bottom: 1px solid #2a2b2e;
+  /*border-radius: 10px 10px;
+    border: 1px solid $border-color;
+    display: flex;
+    top: 10px;
+    right: 10px;
+    position: absolute;
+
+    background-color: $primary-color;
+    height: 51px;*/
 }
 
 .Main .Header .ChatName {
-  margin-left: 10px;
-  margin-right: 10px;
+  display: inline;
+  margin-right: 0;
 }
 
 .Main .Header .icon {
+  display: inline;
+  float: right;
   margin-right: 10px;
 }
 

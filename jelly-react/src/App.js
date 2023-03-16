@@ -12,7 +12,8 @@ class App extends React.Component {
     super(props)
 
     this.state = {
-      userToken: Cookie.get('userToken'),
+      userToken: '32eddfbc63bbae81017917e5d2a9ddc87bdeadf5',
+      //userToken: Cookie.get('userToken'),
       selectedChat: {
         "id": 1,
         "members": [{
@@ -166,6 +167,7 @@ class App extends React.Component {
     return (
       <div className={`${styles.AppContainer}`} onClick={this.onAppClickEvent}>
         <Sidebar 
+          Account={this.state.Account}
           Chats={this.state.Chats} 
           selectedChat={this.state.selectedChat} 
           appCallback={this.changeSelectedChatCallback} 

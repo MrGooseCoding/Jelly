@@ -29,7 +29,10 @@ class Sidebar extends React.Component {
     render () {
         return (
             <div className={styles.Sidebar}>
-                <div className={styles.title}>Jelly</div>
+                <div className={styles.top}>
+                    <div className={styles.title}>Jelly</div>
+                    <img src={`http://trevor.leal.me:8080${this.props.Account.image}`}></img>
+                </div>
                 <div className={styles.SidebarInputContainer}>
                     <input type="text" placeholder='Search chats...'/>
                     <div className='fa-solid fa-plus' onClick={this.onAddChatButtonClick}></div>
