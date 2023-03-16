@@ -11,7 +11,7 @@ class ChatPreview extends React.Component {
         if (!this.props.Chat.image) {
             image = 'http://trevor.leal.me:8080/media/Chat/chat.png'
         } else {
-            image = "http://trevor.leal.me:8080"+this.props.Chat.image
+            image = this.props.Chat.image
         } 
         return (
             <div className={`${styles.ChatPreview} ${(this.props.selected.id===this.props.Chat.id)?styles.selected:null}`} key={this.props.Chat.id} onClick={this.clickHandler}>

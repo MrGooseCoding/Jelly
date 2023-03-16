@@ -62,7 +62,6 @@ class CreateChatModal extends React.Component {
 
     onCheckUsersFormSubmit = (e) => {
         e.preventDefault()
-        console.log('Submit')
     } 
 
     onBackBtnClick = () => {
@@ -77,7 +76,6 @@ class CreateChatModal extends React.Component {
 
         if (this.state.Modal.currentSlide === 1) {
             const checkboxes = $('input[name=userCheckbox]:checked');
-            console.log(checkboxes)
             checkboxes.each(updateUsersList)
             this.setState({users:users})
             if (!(checkboxes.length === 0)) {
@@ -95,7 +93,6 @@ class CreateChatModal extends React.Component {
         } 
 
         else if (this.state.Modal.currentSlide === 3) { 
-            console.log(this.state.users)
             $.ajax({ 
                 method:'POST',
                 url:'http://trevor.leal.me:8080/api/chat/create/',
@@ -115,7 +112,6 @@ class CreateChatModal extends React.Component {
                     }
             }).done((data)=>{
                 var onChatCreate = this.props.onChatCreate
-                console.log(data['data'])
                 var imageInput = document.getElementById('ImageInput')
                 var image = imageInput.files[0]
                 var formdata = new FormData()
@@ -133,9 +129,12 @@ class CreateChatModal extends React.Component {
                             onChatCreate(data)
                         } 
                     })
-                }          
-                    
-                
+                } else {
+                    console.log("Data", data)
+                    data["image"]=""
+                    onChatCreate(data)
+                }
+                this.reset()
             })
         } 
     }
@@ -150,6 +149,17 @@ class CreateChatModal extends React.Component {
 
             reader.readAsDataURL(input.files[0]);
         }
+    }
+
+    reset = () => {
+        this.setState({addedUsers: [], name: '', description: '', users:[]})
+        document.getElementById('AddUserForm').reset()
+        document.getElementById('CheckUsersForm').reset()
+        document.getElementById('ChatDisplayForm').reset()
+        $(`.${styles.slide}.3`).removeClass(styles.active);
+        $(`.${styles.slide}.2`).removeClass(styles.left);
+        $(`.${styles.slide}.1`).removeClass(styles.left).addClass(styles.active)
+        $('#BackBtn').addClass(styles.disabled)
     }
 
     onImageClick = () => {
@@ -189,7 +199,7 @@ class CreateChatModal extends React.Component {
                         </form>
                     </div>
                     <div className= {`${styles.slide} 2`}>
-                        <form action="" className={styles.ChatDisplayForm}>
+                        <form action="" className={styles.ChatDisplayForm} id="ChatDisplayForm">
                             <div className={styles.ChatImage}>
                                 <img src={this.state.image} alt="" className={styles.Image} onClick={this.onImageClick}/>
                                 <input onChange={this.onImageInputChange} tabindex="-1" className={styles.ImageInput} id="ImageInput" type="file" name="Image" accept="image/x-png,image/gif,image/jpeg"/>
