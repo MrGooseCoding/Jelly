@@ -348,7 +348,7 @@ pre {
   .SidebarInputContainer {
     display: flex;
     height: 35px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 
     input {
       height: 17px;
@@ -485,6 +485,11 @@ pre {
 
       &.FirstMessage .ProfilePicture {
         visibility: visible;
+        cursor: pointer;
+
+        &:hover {
+          box-shadow: 0 0 10px 2px #0000004b;
+        }
       }
 
       &.LastMessage .MessageContent {
@@ -595,5 +600,44 @@ pre {
       color: $secundary-color; //rgb(33, 173, 219);
       cursor: pointer;
     }
+  }
+}
+
+.Banner {
+  position: absolute;
+  box-shadow: 0 0 10px 2px #0000004b;
+  border-radius: 10px;
+  padding: 20px;
+  background-color: $primary-color;
+  z-index: 2;
+  transform: translate(0, 60px);
+  transition: 0.5s opacity;
+  opacity: 0;
+
+  &.active {
+    opacity: 1;
+  }
+
+  .Picture {
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+  }
+
+  div.accountPreview {
+    display: flex;
+    div.accountData {
+      margin-top: auto;
+      margin-bottom: auto;
+      margin-left: 5px;
+      display: inline-block;
+    }
+  }
+  .description {
+    margin-top: 5px;
+    background-color: $primary-color-2;
+    padding: 10px;
+    border-radius: 10px;
+    max-width: 200px;
   }
 }

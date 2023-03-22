@@ -369,7 +369,7 @@ pre {
   display: -ms-flexbox;
   display: flex;
   height: 35px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .Sidebar .SidebarInputContainer input {
@@ -514,6 +514,12 @@ pre {
 
 .Main .MessagesContainer .Message.FirstMessage .ProfilePicture {
   visibility: visible;
+  cursor: pointer;
+}
+
+.Main .MessagesContainer .Message.FirstMessage .ProfilePicture:hover {
+  -webkit-box-shadow: 0 0 10px 2px #0000004b;
+          box-shadow: 0 0 10px 2px #0000004b;
 }
 
 .Main .MessagesContainer .Message.LastMessage .MessageContent {
@@ -626,5 +632,51 @@ pre {
   margin-right: 15px;
   color: #880e4f;
   cursor: pointer;
+}
+
+.Banner {
+  position: absolute;
+  -webkit-box-shadow: 0 0 10px 2px #0000004b;
+          box-shadow: 0 0 10px 2px #0000004b;
+  border-radius: 10px;
+  padding: 20px;
+  background-color: #2e2f35;
+  z-index: 2;
+  -webkit-transform: translate(0, 60px);
+          transform: translate(0, 60px);
+  -webkit-transition: 0.5s opacity;
+  transition: 0.5s opacity;
+  opacity: 0;
+}
+
+.Banner.active {
+  opacity: 1;
+}
+
+.Banner .Picture {
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+}
+
+.Banner div.accountPreview {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.Banner div.accountPreview div.accountData {
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: 5px;
+  display: inline-block;
+}
+
+.Banner .description {
+  margin-top: 5px;
+  background-color: #33333a;
+  padding: 10px;
+  border-radius: 10px;
+  max-width: 200px;
 }
 /*# sourceMappingURL=style.module.css.map */
