@@ -1,19 +1,19 @@
 import styles from './style.module.css'
-import Sidebar from './components/Sidebar' 
 import Main from './components/Main'
 import CreateChatModal from './components/CreateChatModal'
 import ChatImage from './images/ChatImage'
 import React from 'react'
 import $ from 'jquery';
 import Cookie from 'js-cookie'
+import SidebarsContainer from './components/SidebarsContainer'
 
 class App extends React.Component {
   constructor(props){
     super(props)
 
     this.state = {
-      //userToken: '32eddfbc63bbae81017917e5d2a9ddc87bdeadf5',
-      userToken: Cookie.get('userToken'),
+      userToken: '32eddfbc63bbae81017917e5d2a9ddc87bdeadf5',
+      //userToken: Cookie.get('userToken'),
       selectedChat: {
         "id": 1,
         "members": [{
@@ -68,6 +68,7 @@ class App extends React.Component {
       
       chatSocket: null,
       activeCreateChatModal: false,
+      activeChatInfo: false,
     }
   }  
 
@@ -152,6 +153,10 @@ class App extends React.Component {
     this.setState({activeCreateChatModal: (this.state.activeCreateChatModal)?false:true})
   } 
 
+  toggleChatInfo = () => {
+    this.setState({activeChatInfo: (this.state.activeChatInfo)?false:true})
+  } 
+
   onAppClickEvent = (e) => {
     var toggleCreateChatModal = this.toggleCreateChatModal
     var active = this.state.activeCreateChatModal
@@ -166,18 +171,21 @@ class App extends React.Component {
     document.title="Jelly"
     return (
       <div className={`${styles.AppContainer}`} onClick={this.onAppClickEvent}>
-        <Sidebar 
+        <SidebarsContainer
           Account={this.state.Account}
           Chats={this.state.Chats} 
           selectedChat={this.state.selectedChat} 
           appCallback={this.changeSelectedChatCallback} 
           toggleCreateChatModal={this.toggleCreateChatModal}
+          activeChatInfo={this.state.activeChatInfo}
         />
-        <Main Chats={this.state.Chats} 
+        <Main 
+          Chats={this.state.Chats} 
           selectedChat={this.state.selectedChat} 
           Account={this.state.Account} 
           Messages={this.state.Messages} 
           onMessageFormSubmit={this.onMessageFormSubmit}
+          toggleChatInfo={this.toggleChatInfo}
         />
         <CreateChatModal 
           userToken={this.state.userToken} 

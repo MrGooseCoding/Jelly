@@ -1,0 +1,92 @@
+import React from "react";
+import Sidebar from "./Sidebar";
+import ChatPreview from "./ChatPreview";
+import Banner from "./Banner";
+import styles from '../style.module.css'
+import ChatImage from '../images/ChatImage'
+
+class SidebarsContainer extends React.Component {
+    constructor (props) {
+        super(props)
+
+        console.log(this.props.selectedChat)
+        this.state = {
+            selected: this.props.selectedChat,
+            activeBanner: 0
+        }
+        console.log(this.props.Chats)
+    } 
+
+    changeState = (chat) => {
+        this.setState({selected:chat},
+            ()=>{this.props.appCallback(chat)})
+    } 
+
+    shouldComponentUpdate (){
+        return true
+    } 
+
+    onMemberImageClick = (e) => {
+        console.log(e)
+        this.setState({activeBanner: (this.state.activeBanner==e.target.id)?0:String(e.target.id)})
+    }
+
+    onAddChatButtonClick = () => {
+        console.log('AddChatButtonClick')
+        this.props.toggleCreateChatModal()
+    } 
+    render () {
+        return (<div className={styles.SidebarsContainer}>
+            <Sidebar className={styles.ChatInfo} active={this.props.activeChatInfo} top={true}>
+                <div className={styles.ChatImage}>
+                    <img src={this.props.selectedChat.image} className={styles.Image}/>
+                </div>
+                <div className={styles.ChatName}>
+                    <strong>{this.props.selectedChat.name}</strong>
+                </div>
+                <div className={styles.ChatDescription}>
+                    {this.props.selectedChat.description}
+                </div>
+                <div className={styles.ChatMembers}>
+                   {this.props.selectedChat.members.map(((member) =>{
+                       return (<div className={styles.member}>
+                            <img id={member.id} src={`http://trevor.leal.me:8080${member.image}`} alt=":)" onClick={this.onMemberImageClick}/>
+                            <div>{member.user.username}</div>
+                            <Banner active={this.state.activeBanner==member.id}>
+                                <div className={styles.accountPreview}>
+                                    <img src={`http://trevor.leal.me:8080${member.image}`} alt='I told you this could happen!' className={`${styles.Picture}`}/>
+                                    <div className={styles.accountData}>
+                                        <div><strong>{member.user.first_name}</strong></div>
+                                        <div>@{member.user.username}</div>
+                                    </div>
+                                </div>
+                                <div className={styles.description}>
+                                    {String(member.description)}
+                                </div>
+                            </Banner>
+                        </div>)
+                   }))}
+                </div>
+            </Sidebar>
+            <Sidebar className={styles.ChatsSidebar}>
+                <div className={styles.top}>
+                    <div className={styles.title}>Jelly</div>
+                    <img src={`http://trevor.leal.me:8080${this.props.Account.image}`}></img>
+                </div>
+                <div className={styles.SidebarInputContainer}>
+                    <input type="text" placeholder='Search chats...'/>
+                    <div className='fa-solid fa-plus' onClick={this.onAddChatButtonClick}></div>
+                </div>
+                <div className={styles.ChatsContainer}>
+                    {this.props.Chats.map((Chat) => {
+                        return (
+                            <ChatPreview Chat={Chat} key={Chat.id} appCallback={this.props.parentCallback} changeState={this.changeState} selected={this.state.selected}/>
+                            )
+                    })}
+                </div>
+            </Sidebar>
+        </div>)
+    }
+}
+
+export default SidebarsContainer

@@ -124,10 +124,12 @@ pre {
   height: -moz-min-content;
   height: min-content;
   padding: 25px;
+  display: none;
 }
 
 .modal.active {
   opacity: 100%;
+  display: block;
   -webkit-transition: opacity 1s;
   transition: opacity 1s;
 }
@@ -320,23 +322,95 @@ pre {
   width: 100vw;
 }
 
+.SidebarsContainer {
+  width: 30vw;
+}
+
 .Sidebar {
+  position: relative;
+  z-index: 1;
   background-color: #2e2f35;
   padding: 0px 10px 10px 10px;
   border-right: #2a2b2e;
   border-right-style: inset;
   border-width: 1px;
-  width: 30vw;
-  /*.title {
-    font-family: "Abril Fatface";
-    font-size: xx-large;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    height: 51px;
-  }*/
+  height: calc(100vh - 10px);
 }
 
-.Sidebar .top {
+.Sidebar.TopSidebar {
+  padding: 0;
+  border-right: #2a2b2e;
+  border-right-style: inset;
+  border-width: 1px;
+  position: absolute;
+  top: -100vh;
+  z-index: 4;
+  -webkit-transition: 0.5s top;
+  transition: 0.5s top;
+}
+
+.Sidebar.TopSidebar.active {
+  top: 0;
+}
+
+.Sidebar.TopSidebar.ChatInfo .ChatImage {
+  height: 30vh;
+  background-color: #33333a;
+  width: 30vw;
+  border-bottom: 1px solid #2a2b2e;
+  margin-bottom: 40px;
+}
+
+.Sidebar.TopSidebar.ChatInfo .ChatImage .Image {
+  padding: 1px;
+  -webkit-transform: translate(calc(15vw - 45px), calc(40vh - 115px));
+          transform: translate(calc(15vw - 45px), calc(40vh - 115px));
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  -webkit-box-shadow: 0 0 0 5px #2e2f35;
+          box-shadow: 0 0 0 5px #2e2f35;
+}
+
+.Sidebar.TopSidebar.ChatInfo .ChatName {
+  text-align: center;
+}
+
+.Sidebar.TopSidebar.ChatInfo .ChatMembers {
+  max-height: 30vh;
+  overflow-y: auto;
+  border-radius: 20px;
+  padding: 10px;
+  margin: 20px;
+  border: 1px solid #2a2b2e;
+}
+
+.Sidebar.TopSidebar.ChatInfo .ChatMembers .member {
+  margin-bottom: 5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.Sidebar.TopSidebar.ChatInfo .ChatMembers .member img {
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+.Sidebar.TopSidebar.ChatInfo .ChatMembers .member img:hover {
+  -webkit-box-shadow: 0 0 10px 2px #0000004b;
+          box-shadow: 0 0 10px 2px #0000004b;
+}
+
+.Sidebar.TopSidebar.ChatInfo .ChatMembers .member div {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.Sidebar.ChatsSidebar .top {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -345,11 +419,11 @@ pre {
   padding-bottom: 10px;
 }
 
-.Sidebar .top .title {
+.Sidebar.ChatsSidebar .top .title {
   font-size: xxx-large;
 }
 
-.Sidebar .top img {
+.Sidebar.ChatsSidebar .top img {
   float: right;
   margin-top: 10px;
   margin-left: auto;
@@ -359,12 +433,12 @@ pre {
   cursor: pointer;
 }
 
-.Sidebar .top img:hover {
+.Sidebar.ChatsSidebar .top img:hover {
   -webkit-box-shadow: 0 0 10px 2px #0000004b;
           box-shadow: 0 0 10px 2px #0000004b;
 }
 
-.Sidebar .SidebarInputContainer {
+.Sidebar.ChatsSidebar .SidebarInputContainer {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -372,7 +446,7 @@ pre {
   margin-bottom: 10px;
 }
 
-.Sidebar .SidebarInputContainer input {
+.Sidebar.ChatsSidebar .SidebarInputContainer input {
   height: 17px;
   width: 100%;
   border: none;
@@ -381,7 +455,7 @@ pre {
   background-color: #33333a;
 }
 
-.Sidebar .SidebarInputContainer div {
+.Sidebar.ChatsSidebar .SidebarInputContainer div {
   padding: 10px;
   height: 17px;
   width: 17px;
@@ -389,12 +463,12 @@ pre {
   color: #880e4f;
 }
 
-.Sidebar .ChatsContainer {
+.Sidebar.ChatsSidebar .ChatsContainer {
   height: calc(100vh - 126px);
   overflow-y: auto;
 }
 
-.Sidebar .ChatsContainer .ChatPreview {
+.Sidebar.ChatsSidebar .ChatsContainer .ChatPreview {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -404,22 +478,22 @@ pre {
   border-radius: 10px;
 }
 
-.Sidebar .ChatsContainer .ChatPreview:hover {
+.Sidebar.ChatsSidebar .ChatsContainer .ChatPreview:hover {
   background-color: #323238;
 }
 
-.Sidebar .ChatsContainer .ChatPreview.selected {
+.Sidebar.ChatsSidebar .ChatsContainer .ChatPreview.selected {
   background-color: #292a30;
 }
 
-.Sidebar .ChatsContainer .ChatPreview .ChatPreviewImage {
+.Sidebar.ChatsSidebar .ChatsContainer .ChatPreview .ChatPreviewImage {
   height: 60px;
   width: 60px;
   border-radius: 50%;
   margin-right: 10px;
 }
 
-.Sidebar .ChatsContainer .ChatPreview .ChatPreviewName {
+.Sidebar.ChatsSidebar .ChatsContainer .ChatPreview .ChatPreviewName {
   margin-top: auto;
   margin-bottom: auto;
 }
@@ -431,12 +505,14 @@ pre {
 }
 
 .Main .Header {
+  z-index: 3;
   width: calc(70vw - 20px);
   position: absolute;
   padding-top: 22.5px;
   padding-left: 10px;
   padding-bottom: 22.5px;
   border-bottom: 1px solid #2a2b2e;
+  background-color: #2e2f35;
   /*border-radius: 10px 10px;
     border: 1px solid $border-color;
     display: flex;
@@ -444,7 +520,6 @@ pre {
     right: 10px;
     position: absolute;
 
-    background-color: $primary-color;
     height: 51px;*/
 }
 
@@ -457,6 +532,15 @@ pre {
   display: inline;
   float: right;
   margin-right: 10px;
+}
+
+.Main .Header .icon.compassIcon:hover {
+  -webkit-transition: 1s -webkit-transform;
+  transition: 1s -webkit-transform;
+  transition: 1s transform;
+  transition: 1s transform, 1s -webkit-transform;
+  -webkit-transform: rotate(360deg);
+          transform: rotate(360deg);
 }
 
 .Main .MessagesContainer {
@@ -644,13 +728,15 @@ pre {
   z-index: 2;
   -webkit-transform: translate(0, 60px);
           transform: translate(0, 60px);
-  -webkit-transition: 0.5s opacity;
-  transition: 0.5s opacity;
   opacity: 0;
+  display: none;
 }
 
 .Banner.active {
   opacity: 1;
+  display: block;
+  -webkit-transition: 1s opacity;
+  transition: 1s opacity;
 }
 
 .Banner .Picture {

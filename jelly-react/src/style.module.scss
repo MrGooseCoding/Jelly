@@ -131,9 +131,11 @@ pre {
   transform: translate(-50%, -50%);
   height: min-content;
   padding: 25px;
+  display: none;
 
   &.active {
     opacity: 100%;
+    display: block;
     transition: opacity 1s;
   }
 
@@ -305,100 +307,167 @@ pre {
   width: 100vw;
 }
 
+.SidebarsContainer {
+  width: 30vw;
+}
+
 .Sidebar {
+  position: relative;
+  z-index: 1;
   background-color: $primary-color;
   padding: 0px 10px 10px 10px;
   border-right: $border-color;
   border-right-style: inset;
   border-width: 1px;
-  width: 30vw;
+  height: calc(100vh - 10px);
 
-  .top {
-    display: flex;
-    height: 60px;
-    width: calc(30vw - 21px);
-    padding-bottom: 10px;
+  &.TopSidebar {
+    padding: 0;
+    border-right: $border-color;
+    border-right-style: inset;
+    border-width: 1px;
+    position: absolute;
+    top: -100vh;
+    z-index: 4;
+    transition: 0.5s top;
 
-    .title {
-      font-size: xxx-large;
+    &.active {
+      top: 0;
     }
-    img {
-      float: right;
-      margin-top: 10px;
-      margin-left: auto;
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      cursor: pointer;
 
-      &:hover {
-        box-shadow: 0 0 10px 2px #0000004b;
+    &.ChatInfo {
+      .ChatImage {
+        height: 30vh;
+        background-color: $primary-color-2;
+        width: 30vw;
+        border-bottom: 1px solid $border-color;
+
+        .Image {
+          padding: 1px;
+          transform: translate(calc(15vw - 45px), calc(40vh - 115px));
+          width: 90px;
+          height: 90px;
+          border-radius: 50%;
+          box-shadow: 0 0 0 5px $primary-color;
+        }
+        margin-bottom: 40px;
+      }
+      .ChatName {
+        text-align: center;
+      }
+      .ChatMembers {
+        max-height: 30vh;
+        overflow-y: auto;
+        border-radius: 20px;
+        padding: 10px;
+        margin: 20px;
+        border: 1px solid $border-color;
+
+        .member {
+          margin-bottom: 5px;
+          display: flex;
+
+          img {
+            border-radius: 50%;
+            height: 40px;
+            width: 40px;
+            margin-right: 5px;
+            cursor: pointer;
+
+            &:hover {
+              box-shadow: 0 0 10px 2px #0000004b;
+            }
+          }
+
+          div {
+            margin-top: auto;
+            margin-bottom: auto;
+          }
+        }
       }
     }
   }
 
-  /*.title {
-    font-family: "Abril Fatface";
-    font-size: xx-large;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    height: 51px;
-  }*/
-
-  .SidebarInputContainer {
-    display: flex;
-    height: 35px;
-    margin-bottom: 10px;
-
-    input {
-      height: 17px;
-      width: 100%;
-      border: none;
-      outline: none;
-      margin-right: 10px;
-      background-color: $primary-color-2;
-    }
-
-    div {
-      //      background-color: $primary-color-2;
-
-      padding: 10px;
-
-      height: 17px;
-      width: 17px;
-      cursor: pointer;
-
-      color: $secundary-color;
-    }
-  }
-  .ChatsContainer {
-    height: calc(100vh - 126px);
-    overflow-y: auto;
-    .ChatPreview {
+  &.ChatsSidebar {
+    .top {
       display: flex;
-      padding: 10px;
-      margin: 10px 0 0 0;
-      cursor: pointer;
-      border-radius: 10px;
+      height: 60px;
+      width: calc(30vw - 21px);
+      padding-bottom: 10px;
 
-      &:hover {
-        background-color: $primary-color-hover;
+      .title {
+        font-size: xxx-large;
       }
-
-      &.selected {
-        background-color: $primary-color-selected;
-      }
-
-      .ChatPreviewImage {
-        height: 60px;
-        width: 60px;
+      img {
+        float: right;
+        margin-top: 10px;
+        margin-left: auto;
+        width: 50px;
+        height: 50px;
         border-radius: 50%;
+        cursor: pointer;
+
+        &:hover {
+          box-shadow: 0 0 10px 2px #0000004b;
+        }
+      }
+    }
+
+    .SidebarInputContainer {
+      display: flex;
+      height: 35px;
+      margin-bottom: 10px;
+
+      input {
+        height: 17px;
+        width: 100%;
+        border: none;
+        outline: none;
         margin-right: 10px;
+        background-color: $primary-color-2;
       }
 
-      .ChatPreviewName {
-        margin-top: auto;
-        margin-bottom: auto;
+      div {
+        //      background-color: $primary-color-2;
+
+        padding: 10px;
+
+        height: 17px;
+        width: 17px;
+        cursor: pointer;
+
+        color: $secundary-color;
+      }
+    }
+    .ChatsContainer {
+      height: calc(100vh - 126px);
+      overflow-y: auto;
+      .ChatPreview {
+        display: flex;
+        padding: 10px;
+        margin: 10px 0 0 0;
+        cursor: pointer;
+        border-radius: 10px;
+
+        &:hover {
+          background-color: $primary-color-hover;
+        }
+
+        &.selected {
+          background-color: $primary-color-selected;
+        }
+
+        .ChatPreviewImage {
+          height: 60px;
+          width: 60px;
+          border-radius: 50%;
+          margin-right: 10px;
+        }
+
+        .ChatPreviewName {
+          margin-top: auto;
+          margin-bottom: auto;
+        }
       }
     }
   }
@@ -410,12 +479,15 @@ pre {
   background-color: $primary-color;
 
   .Header {
+    z-index: 3;
     width: calc(70vw - 20px);
     position: absolute;
     padding-top: 22.5px;
     padding-left: 10px;
     padding-bottom: 22.5px;
     border-bottom: 1px solid $border-color;
+    background-color: $primary-color;
+
     /*border-radius: 10px 10px;
     border: 1px solid $border-color;
     display: flex;
@@ -423,7 +495,6 @@ pre {
     right: 10px;
     position: absolute;
 
-    background-color: $primary-color;
     height: 51px;*/
 
     .ChatName {
@@ -435,6 +506,13 @@ pre {
       display: inline;
       float: right;
       margin-right: 10px;
+
+      &.compassIcon {
+        &:hover {
+          transition: 1s transform;
+          transform: rotate(360deg);
+        }
+      }
     }
   }
 
@@ -611,11 +689,13 @@ pre {
   background-color: $primary-color;
   z-index: 2;
   transform: translate(0, 60px);
-  transition: 0.5s opacity;
   opacity: 0;
+  display: none;
 
   &.active {
     opacity: 1;
+    display: block;
+    transition: 1s opacity;
   }
 
   .Picture {

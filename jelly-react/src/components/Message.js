@@ -10,6 +10,7 @@ class Message extends React.Component {
     }
 
     onProfilePictureClick = () => {
+        console.log('Click')
         this.setState({activeBanner: (this.state.activeBanner)?false:true})
     }
 
