@@ -28,7 +28,7 @@ class CreateChatModal extends React.Component {
             },
             addedUsers: [],
             users: [],
-            image: "http://trevor.leal.me:8080/media/Account/user.png", 
+            image: "/media/Account/user.png", 
         } 
     }  
 
@@ -40,7 +40,7 @@ class CreateChatModal extends React.Component {
             if (username !== this.props.Account.user.username) {
                 $.ajax({
                     method:'POST',
-                    url:'http://trevor.leal.me:8080/api/account/exists/',
+                    url:'/api/account/exists/',
                     headers:{
                         Authorization: `Token ${this.props.userToken}`, 
                         "Access-Control-Allow-Origin": "*",
@@ -95,7 +95,7 @@ class CreateChatModal extends React.Component {
         else if (this.state.Modal.currentSlide === 3) { 
             $.ajax({ 
                 method:'POST',
-                url:'http://trevor.leal.me:8080/api/chat/create/',
+                url:'/api/chat/create/',
                 headers: {
                     "Accept": "application/json",
                     Authorization: `Token ${this.props.userToken}`, 
@@ -119,7 +119,7 @@ class CreateChatModal extends React.Component {
                 formdata.append('chat_id', data['data']['id'])
                 if (image !== undefined) {
                     $.ajax({
-                        url: 'http://trevor.leal.me:8080/api/chat/update_image/',
+                        url: '/api/chat/update_image/',
                         type:'POST',
                         headers: {Authorization: `Token ${this.props.userToken}`},
                         data: formdata,

@@ -9,7 +9,7 @@ class ChatPreview extends React.Component {
     render () {
         var image = null
         if (!this.props.Chat.image) {
-            image = 'http://trevor.leal.me:8080/media/Chat/chat.png'
+            image = '/media/Chat/chat.png'
         } else {
             image = this.props.Chat.image
         } 

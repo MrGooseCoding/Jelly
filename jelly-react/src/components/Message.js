@@ -27,9 +27,9 @@ class Message extends React.Component {
         } 
 
         if (!this.props.MessageData.author.image) {
-            var image = 'http://trevor.leal.me:8080/media/Account/user.png'
+            var image = '/media/Account/user.png'
         } else {
-            var image = 'http://trevor.leal.me:8080'+this.props.MessageData.author.image
+            var image = ''+this.props.MessageData.author.image
         } 
 
         var Author = this.props.MessageData.author

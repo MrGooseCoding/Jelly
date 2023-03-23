@@ -50,11 +50,11 @@ class SidebarsContainer extends React.Component {
                 <div className={styles.ChatMembers}>
                    {this.props.selectedChat.members.map(((member) =>{
                        return (<div className={styles.member}>
-                            <img id={member.id} src={`http://trevor.leal.me:8080${member.image}`} alt=":)" onClick={this.onMemberImageClick}/>
+                            <img id={member.id} src={`${member.image}`} alt=":)" onClick={this.onMemberImageClick}/>
                             <div>{member.user.username}</div>
                             <Banner active={this.state.activeBanner==member.id}>
                                 <div className={styles.accountPreview}>
-                                    <img src={`http://trevor.leal.me:8080${member.image}`} alt='I told you this could happen!' className={`${styles.Picture}`}/>
+                                    <img src={`${member.image}`} alt='I told you this could happen!' className={`${styles.Picture}`}/>
                                     <div className={styles.accountData}>
                                         <div><strong>{member.user.first_name}</strong></div>
                                         <div>@{member.user.username}</div>
@@ -71,7 +71,7 @@ class SidebarsContainer extends React.Component {
             <Sidebar className={styles.ChatsSidebar}>
                 <div className={styles.top}>
                     <div className={styles.title}>Jelly</div>
-                    <img src={`http://trevor.leal.me:8080${this.props.Account.image}`}></img>
+                    <img src={`${this.props.Account.image}`}></img>
                 </div>
                 <div className={styles.SidebarInputContainer}>
                     <input type="text" placeholder='Search chats...'/>

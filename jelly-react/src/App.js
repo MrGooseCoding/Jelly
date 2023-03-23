@@ -80,7 +80,7 @@ class App extends React.Component {
   getAccount = async function () {
     $.ajax({ 
       method:'POST',
-      url:'http://trevor.leal.me:8080/api/account/get/',
+      url:'/api/account/get/',
       headers: {
         Authorization: `Token ${this.state.userToken}`, 
         "Access-Control-Allow-Origin": "*",
@@ -97,7 +97,7 @@ class App extends React.Component {
   getChats = async function () {
     $.ajax({
       method:'POST',
-      url:'http://trevor.leal.me:8080/api/chat/get/',
+      url:'/api/chat/get/',
       headers:{
         Authorization: `Token ${this.state.userToken}`, 
         "Access-Control-Allow-Origin": "*",
@@ -114,7 +114,7 @@ class App extends React.Component {
       this.state.chatSocket.close();
     } 
 
-    let url = `ws://trevor.leal.me:8080/ws/${chat_id}/${this.state.userToken}/`
+    let url = `ws://${window.location.host}/ws/${chat_id}/${this.state.userToken}/`
 
     let self = this
 
