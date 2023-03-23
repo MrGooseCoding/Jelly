@@ -4,7 +4,7 @@ $(document).ready(()=>{
         e.preventDefault()
         $.post('/api/account/login/', {username: e.target.username.value, password: e.target.password.value, csrfmiddlewaretoken:csrftoken,}, 
             (data)=>{
-                document.cookie = `userToken=${data['token']}; domain=trevor.leal.me;path=/;`
+                document.cookie = `userToken=${data['token']}; domain=${window.location.host};path=/;`
                 document.getElementById('LoginForm').submit()
             }
             )

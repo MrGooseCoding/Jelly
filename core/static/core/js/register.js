@@ -129,7 +129,7 @@ $('document').ready(()=>{
         $.post('/api/account/create/', {csrfmiddlewaretoken:csrftoken, account:account}, 
             function(data) { 
                 if (User.image != undefined) {
-                    document.cookie = `userToken=${data['token']}; domain=trevor.leal.me;path=/;`
+                    document.cookie = `userToken=${data['token']}; domain=${window.location.host};path=/;`
                     $.ajax({
                         url: '/api/account/update_image/',
                         type:'POST',
