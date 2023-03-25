@@ -62,6 +62,8 @@ class AccountViewSet(ModelViewSet):
             if authenticate(username=request.data['username'], password=request.data['password']):
                 token= Token.objects.get_or_create(user=User.objects.get(username=request.data['username']))[0]
                 print(token.key)
+                print(request.data['username'], token.key)
+
                 return Response({"token":token.key})
             return Response({"status": "Invalid Username or Password"})
         except KeyError:

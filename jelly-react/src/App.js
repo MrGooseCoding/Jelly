@@ -12,8 +12,8 @@ class App extends React.Component {
     super(props)
 
     this.state = {
-      userToken: '32eddfbc63bbae81017917e5d2a9ddc87bdeadf5',
-      //userToken: Cookie.get('userToken'),
+      //userToken: '32eddfbc63bbae81017917e5d2a9ddc87bdeadf5',
+      userToken: Cookie.get('userToken'),
       selectedChat: {
         "id": 1,
         "members": [{

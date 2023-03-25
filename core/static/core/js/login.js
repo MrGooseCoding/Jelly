@@ -21,7 +21,11 @@ $(document).on('ready', ()=>{
         $.post('/api/account/login/', {username: e.target.username.value, password: e.target.password.value, csrfmiddlewaretoken:csrftoken,}, 
             (data)=>{
                 document.cookie = `userToken=${data['token']}; domain=${window.location.host};path=/;`
-                document.getElementById('LoginForm').submit()
+                
+                if (data['token']) {
+                    document.getElementById('LoginForm').submit()
+                }
+                document.getElementById('LoginForm').reset()
             }
             )
     })

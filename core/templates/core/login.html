@@ -17,7 +17,7 @@
     <script src="{% static 'core/js/login.js' %}"></script>
 </head>
 <body>
-    <form action="" class="modal active" id ="LoginForm" action="/login/" method="post">
+    <form class="modal active" id ="LoginForm" action="/login/" method="post">
         {% csrf_token %}
         <div class="title">Login</div>
         <label for="username">Username</label>
