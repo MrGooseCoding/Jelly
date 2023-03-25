@@ -20,7 +20,7 @@ $(document).on('ready', ()=>{
         e.preventDefault()
         $.post('/api/account/login/', {username: e.target.username.value, password: e.target.password.value, csrfmiddlewaretoken:csrftoken,}, 
             (data)=>{
-                document.cookie = `userToken=${data['token']}; domain=${window.location.host};path=/;`
+                document.cookie = `userToken=${data['token']};`
                 
                 if (data['token']) {
                     document.getElementById('LoginForm').submit()
