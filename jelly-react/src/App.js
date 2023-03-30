@@ -96,7 +96,7 @@ class App extends React.Component {
   getChats = async function () {
     $.ajax({
       method:'POST',
-      url:'s/api/chat/get/',
+      url:'/api/chat/get/',
       headers:{
         Authorization: `Token ${this.state.userToken}`, 
         "Access-Control-Allow-Origin": "*",
