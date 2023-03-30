@@ -8,12 +8,10 @@ class SidebarsContainer extends React.Component {
     constructor (props) {
         super(props)
 
-        console.log(this.props.selectedChat)
         this.state = {
             selected: this.props.selectedChat,
             activeBanner: 0
         }
-        console.log(this.props.Chats)
     } 
 
     changeState = (chat) => {
@@ -60,19 +58,13 @@ class SidebarsContainer extends React.Component {
                                 onError={({currentTarget})=>currentTarget.src='/media/Account/user.png'}
                                 onClick={this.onMemberImageClick} />
                             <div>{member.user.username}</div>
-                            <Banner active={this.state.activeBanner==member.id}>
-                                <div className={styles.accountPreview}>
-                                    <img src={`${member.image}`}
-                                        onError={({currentTarget})=>currentTarget.src='/media/Account/user.png'}
-                                        className={`${styles.Picture}`}/>
-                                    <div className={styles.accountData}>
-                                        <div><strong>{member.user.first_name}</strong></div>
-                                        <div>@{member.user.username}</div>
-                                    </div>
-                                </div>
-                                <div className={styles.description}>
-                                    {String(member.description)}
-                                </div>
+                            <Banner active={this.state.activeBanner==member.id}
+                                object={{
+                                    image:member.image,
+                                    name:member.user.first_name,
+                                    subname:'@'+member.user.username,
+                                    description:member.description
+                                }}>
                             </Banner>
                         </div>)
                    }))}

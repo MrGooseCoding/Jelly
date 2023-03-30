@@ -748,13 +748,13 @@ pre {
   height: 60px;
 }
 
-.Banner div.accountPreview {
+.Banner div.bannerTop {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
 }
 
-.Banner div.accountPreview div.accountData {
+.Banner div.bannerTop div.data {
   margin-top: auto;
   margin-bottom: auto;
   margin-left: 5px;

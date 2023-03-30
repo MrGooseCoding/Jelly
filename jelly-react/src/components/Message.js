@@ -27,7 +27,14 @@ class Message extends React.Component {
         } 
         var Author = this.props.MessageData.author
         var image = Author.image
+        var object = {
+            image: Author.image,
+            name: Author.user.first_name,
+            subname: '@'+Author.user.username,
+            description: Author.description
+        }
 
+        console.log(Author.image)
         if (!SelfMessage) {
             return (
                 <div className={`${styles.Message} ${(LastMessage)?styles.LastMessage:null} ${(FirstMessage)?styles.FirstMessage:null}`}>
@@ -35,19 +42,10 @@ class Message extends React.Component {
                         onClick={this.onProfilePictureClick}
                         onError={({currentTarget})=>currentTarget.src='/media/Account/user.png'}/>
                     
-                    <Banner active={this.state.activeBanner}>
-                        <div className={styles.accountPreview}>
-                            <img src={`${image}`} alt='I told you this could happen!' className={`${styles.Picture}`}
-                                onError={({currentTarget})=>currentTarget.src='/media/Account/user.png'}/>
-
-                            <div className={styles.accountData}>
-                                <div><strong>{Author.user.first_name}</strong></div>
-                                <div>@{Author.user.username}</div>
-                            </div>
-                        </div>
-                        <div className={styles.description}>
-                            {String(Author.description)}
-                        </div>
+                    <Banner
+                        active={this.state.activeBanner}
+                        object={object}>
+                        <div></div>
                     </Banner>
 
                     <div>
