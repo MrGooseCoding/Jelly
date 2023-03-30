@@ -3,7 +3,6 @@ import Sidebar from "./Sidebar";
 import ChatPreview from "./ChatPreview";
 import Banner from "./Banner";
 import styles from '../style.module.css'
-import ChatImage from '../images/ChatImage'
 
 class SidebarsContainer extends React.Component {
     constructor (props) {
@@ -36,10 +35,17 @@ class SidebarsContainer extends React.Component {
         this.props.toggleCreateChatModal()
     } 
     render () {
+        function onImageError (target, url) {
+            console.log(target.src, url)
+            target.onerror=null
+            target.src=url
+        }
         return (<div className={styles.SidebarsContainer}>
             <Sidebar className={styles.ChatInfo} active={this.props.activeChatInfo} top={true}>
                 <div className={styles.ChatImage}>
-                    <img src={this.props.selectedChat.image} className={styles.Image}/>
+                    <img src={this.props.selectedChat.image} className={styles.Image} 
+                        onError={({currentTarget})=>currentTarget.src='/media/Account/user.png'}/>
+
                 </div>
                 <div className={styles.ChatName}>
                     <strong>{this.props.selectedChat.name}</strong>
@@ -50,11 +56,15 @@ class SidebarsContainer extends React.Component {
                 <div className={styles.ChatMembers}>
                    {this.props.selectedChat.members.map(((member) =>{
                        return (<div className={styles.member}>
-                            <img id={member.id} src={`${member.image}`} alt=":)" onClick={this.onMemberImageClick}/>
+                            <img id={member.id} src={`${member.image}`}
+                                onError={({currentTarget})=>currentTarget.src='/media/Account/user.png'}
+                                onClick={this.onMemberImageClick} />
                             <div>{member.user.username}</div>
                             <Banner active={this.state.activeBanner==member.id}>
                                 <div className={styles.accountPreview}>
-                                    <img src={`${member.image}`} alt='I told you this could happen!' className={`${styles.Picture}`}/>
+                                    <img src={`${member.image}`}
+                                        onError={({currentTarget})=>currentTarget.src='/media/Account/user.png'}
+                                        className={`${styles.Picture}`}/>
                                     <div className={styles.accountData}>
                                         <div><strong>{member.user.first_name}</strong></div>
                                         <div>@{member.user.username}</div>
@@ -71,7 +81,9 @@ class SidebarsContainer extends React.Component {
             <Sidebar className={styles.ChatsSidebar}>
                 <div className={styles.top}>
                     <div className={styles.title}>Jelly</div>
-                    <img src={`${this.props.Account.image}`}></img>
+                    <img src={`${this.props.Account.image}`}
+                        onError={({currentTarget})=>currentTarget.src='/media/Account/user.png'}/>
+
                 </div>
                 <div className={styles.SidebarInputContainer}>
                     <input type="text" placeholder='Search chats...'/>

@@ -25,22 +25,21 @@ class Message extends React.Component {
                 return (html)
             } 
         } 
-
-        if (!this.props.MessageData.author.image) {
-            var image = '/media/Account/user.png'
-        } else {
-            var image = ''+this.props.MessageData.author.image
-        } 
-
         var Author = this.props.MessageData.author
+        var image = Author.image
+
         if (!SelfMessage) {
             return (
                 <div className={`${styles.Message} ${(LastMessage)?styles.LastMessage:null} ${(FirstMessage)?styles.FirstMessage:null}`}>
-                    <img src={image} alt='I told you this could happen!' className={`${styles.ProfilePicture}`} onClick={this.onProfilePictureClick}/>
+                    <img src={image || 'data:image/gif;' } alt='I told you this could happen!' className={`${styles.ProfilePicture}`} 
+                        onClick={this.onProfilePictureClick}
+                        onError={({currentTarget})=>currentTarget.src='/media/Account/user.png'}/>
                     
                     <Banner active={this.state.activeBanner}>
                         <div className={styles.accountPreview}>
-                            <img src={image} alt='I told you this could happen!' className={`${styles.Picture}`}/>
+                            <img src={`${image}`} alt='I told you this could happen!' className={`${styles.Picture}`}
+                                onError={({currentTarget})=>currentTarget.src='/media/Account/user.png'}/>
+
                             <div className={styles.accountData}>
                                 <div><strong>{Author.user.first_name}</strong></div>
                                 <div>@{Author.user.username}</div>

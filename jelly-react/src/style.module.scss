@@ -130,8 +130,10 @@ pre {
   left: 50%;
   transform: translate(-50%, -50%);
   height: min-content;
+  max-width: 400px;
   padding: 25px;
   display: none;
+  z-index: 5;
 
   &.active {
     opacity: 100%;
@@ -322,6 +324,7 @@ pre {
   height: calc(100vh - 10px);
 
   &.TopSidebar {
+    width: 30vw;
     padding: 0;
     border-right: $border-color;
     border-right-style: inset;
@@ -344,13 +347,13 @@ pre {
 
         .Image {
           padding: 1px;
-          transform: translate(calc(15vw - 45px), calc(40vh - 115px));
+          transform: translate(calc(15vw - 45px), calc(30vh - 45px));
           width: 90px;
           height: 90px;
           border-radius: 50%;
           box-shadow: 0 0 0 5px $primary-color;
         }
-        margin-bottom: 40px;
+        margin-bottom: 50px;
       }
       .ChatName {
         text-align: center;

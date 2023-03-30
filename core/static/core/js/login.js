@@ -1,4 +1,4 @@
-$(document).on('ready', ()=>{
+$(function () {
     function getCookie(name) {
         let cookieValue = null;
         if (document.cookie && document.cookie !== '') {
@@ -20,7 +20,8 @@ $(document).on('ready', ()=>{
         e.preventDefault()
         $.post('/api/account/login/', {username: e.target.username.value, password: e.target.password.value, csrfmiddlewaretoken:csrftoken,}, 
             (data)=>{
-                document.cookie = `userToken=${data['token']};`
+                var hostname = window.location.hostname
+                document.cookie = `userToken=${data['token']}; domain=${hostname.split('.')[1]}.${hostname.split('.')[2]}; path=/;`
                 
                 if (data['token']) {
                     document.getElementById('LoginForm').submit()

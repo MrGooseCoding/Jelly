@@ -1,0 +1,801 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300&display=swap");
+* {
+  color: white;
+}
+
+/*body {
+  font-family: "Open Sans";
+  font-size: medium;
+  background-color: $background-color;
+}*/
+body {
+  font-family: "Inter Tight", sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #2e2f35;
+}
+
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  outline: none;
+  background-color: #33333a;
+  border-radius: 10px;
+}
+
+input[type="button"],
+input[type="submit"] {
+  border: none;
+  outline: none;
+  padding: 12.5px;
+  margin-right: 5px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: inherit;
+}
+
+input[type="button"].btnPurple,
+input[type="submit"].btnPurple {
+  background-color: #880e4f;
+  color: white;
+}
+
+input[type="button"].btnPurple:hover,
+input[type="submit"].btnPurple:hover {
+  background-color: #770c45;
+}
+
+input[type="button"].btnPurple.disabled,
+input[type="submit"].btnPurple.disabled {
+  background-color: #6b0b3e;
+  color: gray;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+input[type="button"],
+input[type="submit"],
+button {
+  border: none;
+  outline: none;
+  padding: 12.5px;
+  margin-right: 5px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: inherit;
+}
+
+input[type="button"].btnPurple,
+input[type="submit"].btnPurple,
+button.btnPurple {
+  background-color: #880e4f;
+  color: white;
+}
+
+input[type="button"].btnPurple:hover,
+input[type="submit"].btnPurple:hover,
+button.btnPurple:hover {
+  background-color: #770c45;
+}
+
+input[type="button"].btnPurple.disabled,
+input[type="submit"].btnPurple.disabled,
+button.btnPurple.disabled {
+  background-color: #6b0b3e;
+  color: gray;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.header {
+  z-index: 4;
+  position: absolute;
+  background-color: #2e2f35;
+  width: 100%;
+  border-bottom: 1px solid #0000004b;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-shadow: 0 5px 10px 0 #0000004b;
+          box-shadow: 0 5px 10px 0 #0000004b;
+}
+
+.header .logo {
+  margin: 10px 0 10px 0;
+  width: 100px;
+}
+
+.header .container,
+.header a {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.header a {
+  margin-left: auto;
+  margin-right: 10px;
+  padding: 15px;
+  border-radius: 35px;
+  background-color: #880e4f;
+  -webkit-box-shadow: 0 1px 10px 0 #0000004b;
+          box-shadow: 0 1px 10px 0 #0000004b;
+  -webkit-transition: 1s -webkit-transform;
+  transition: 1s -webkit-transform;
+  transition: 1s transform;
+  transition: 1s transform, 1s -webkit-transform;
+}
+
+.header a:hover {
+  background-color: #770c45;
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+}
+
+.wrapper {
+  width: 90vw;
+  margin-left: 5vw;
+  margin-right: 5vw;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+  position: relative;
+  z-index: 1;
+}
+
+.wrapper .scrollTopDiv {
+  height: 120px;
+}
+
+.wrapper .banner {
+  -webkit-box-shadow: 0px 5px 10px 0 #0000004b;
+          box-shadow: 0px 5px 10px 0 #0000004b;
+  background-image: url("/static/core/images/BannerJelly.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: auto;
+  height: calc(90vw * 0.7221);
+  border-radius: 0 0 20px 20px;
+}
+
+.wrapper .banner .bannerForm {
+  position: relative;
+  width: 300px;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.wrapper .banner .bannerForm input[type="text"] {
+  -webkit-transition: 1s -webkit-transform;
+  transition: 1s -webkit-transform;
+  transition: 1s transform;
+  transition: 1s transform, 1s -webkit-transform;
+  padding: 10px;
+  border-radius: 25px;
+}
+
+.wrapper .banner .bannerForm input[type="text"]:focus {
+  -webkit-transition: 1s -webkit-transform;
+  transition: 1s -webkit-transform;
+  transition: 1s transform;
+  transition: 1s transform, 1s -webkit-transform;
+  -webkit-transform: scale(1.5);
+          transform: scale(1.5);
+}
+
+.wrapper .banner .bannerForm input[type="text"]:focus ~ div {
+  opacity: 0;
+  -webkit-transition: 0.5s opacity;
+  transition: 0.5s opacity;
+}
+
+.wrapper .banner .bannerForm div {
+  padding: 10px;
+  background-color: #880e4f;
+  margin-left: 10px;
+  border-radius: 25px;
+  cursor: pointer;
+}
+
+.infoWrapper {
+  margin-top: 20px;
+}
+
+.infoWrapper .info {
+  opacity: 10%;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  padding-left: 5vw;
+  padding-right: 5vw;
+  background-color: #33333a;
+  -webkit-transition: 1s opacity;
+  transition: 1s opacity;
+}
+
+.infoWrapper .info .content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  font-size: x-large;
+}
+
+.infoWrapper .info .content img {
+  width: 30vw;
+  border-radius: 20px;
+  margin-right: 20px;
+}
+
+.infoWrapper .info .content div {
+  white-space: pre-line;
+}
+
+.infoWrapper .info.active {
+  opacity: 100%;
+}
+
+.infoWrapper .info#info1 .content div {
+  margin-top: auto;
+}
+
+.infoWrapper .info#info3 .title {
+  margin-right: 20px;
+}
+
+.footer {
+  display: block;
+  background-color: #2e2f35;
+  padding: 30px;
+  margin-right: auto;
+}
+
+.footer .ready {
+  width: 100%;
+  margin-left: auto;
+}
+
+.footer .ready .readyText {
+  display: inline;
+  color: #880e4f;
+}
+
+.title {
+  font-family: "Abril Fatface";
+  font-size: xxx-large;
+  font-weight: 600;
+}
+
+form .error {
+  color: red;
+  visibility: hidden;
+  position: absolute;
+}
+
+form .error.active {
+  visibility: visible;
+  position: static;
+}
+
+pre {
+  position: static;
+  border: 1px solid;
+  border-radius: 10px;
+  border-color: #2a2b2e;
+  padding: 10px;
+  margin: 0;
+  background-color: #2e2f35;
+}
+
+.code {
+  border: 1px solid;
+  border-radius: 10px;
+  border-color: #2a2b2e;
+  padding: 10px;
+}
+
+.icon {
+  margin-top: auto;
+  margin-bottom: auto;
+  cursor: pointer;
+}
+
+.title {
+  font-family: "Abril Fatface";
+  font-size: xxx-large;
+  font-weight: 600;
+}
+
+.modal {
+  opacity: 0%;
+  -webkit-box-shadow: 0 0 0 9999px #0000004b;
+          box-shadow: 0 0 0 9999px #0000004b;
+  position: absolute;
+  background-color: #2e2f35;
+  border: 1px solid;
+  border-radius: 10px 10px;
+  border-color: #2a2b2e;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  height: -webkit-min-content;
+  height: -moz-min-content;
+  height: min-content;
+  padding: 25px;
+}
+
+.modal.active {
+  opacity: 100%;
+  -webkit-transition: opacity 1s;
+  transition: opacity 1s;
+}
+
+.modal.active ~ * {
+  pointer-events: none;
+}
+
+.modal .container {
+  overflow: hidden;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+}
+
+.modal .container .slide {
+  background-color: #2e2f35;
+  min-width: 100%;
+  pointer-events: none;
+  display: inline-block;
+  height: 0px;
+  -webkit-transition: margin 1s, height 1s;
+  transition: margin 1s, height 1s;
+}
+
+.modal .container .slide.left {
+  background-color: #2e2f35;
+  margin-left: -100%;
+}
+
+.modal .container .slide.active {
+  pointer-events: unset;
+  background-color: #2e2f35;
+  height: auto;
+  -webkit-transition: margin 1s, height 1s;
+  transition: margin 1s, height 1s;
+  margin-left: 0;
+}
+
+.modal .modalButtons {
+  margin-top: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.UsernameInput {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.UsernameInput div {
+  vertical-align: text-bottom;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  height: 35px;
+  width: 35px;
+  background-color: #33333a;
+  border: 1px solid #2a2b2e;
+  border-radius: 0.5rem 0 0 0.5rem;
+}
+
+.UsernameInput input {
+  border-radius: 0 0.5rem 0.5rem 0;
+}
+
+.RegisterUserDisplay {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.RegisterUserDisplay .Picture {
+  margin-right: 10px;
+}
+
+.RegisterUserDisplay .Picture .ProfilePicture {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.RegisterUserDisplay .Picture .ProfilePictureInput {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.RegisterUserDisplay .DisplayNameAndUsername {
+  width: 100%;
+}
+
+.RegisterUserDisplay .DisplayNameAndUsername input[name="DisplayName"] {
+  margin-bottom: 10px;
+  border-radius: 0.5rem;
+}
+
+.RegisterUserDisplay .DisplayNameAndUsername div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.RegisterUserDisplay .DisplayNameAndUsername div div {
+  vertical-align: text-bottom;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  height: 35px;
+  width: 35px;
+  background-color: #33333a;
+  border: 1px solid #2a2b2e;
+  border-radius: 0.5rem 0 0 0.5rem;
+}
+
+.RegisterUserDisplay .DisplayNameAndUsername div input {
+  border-radius: 0 0.5rem 0.5rem 0;
+}
+
+.ChatDisplayForm {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.ChatDisplayForm .ChatImage {
+  margin-right: 10px;
+}
+
+.ChatDisplayForm .ChatImage .Image {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.ChatDisplayForm .ChatImage .ImageInput {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.ChatDisplayForm .NameAndDescription {
+  width: calc(100% - 90px);
+}
+
+.ChatDisplayForm .NameAndDescription input {
+  width: calc(100% - 20px);
+  border-radius: 10px;
+  margin-top: 5px;
+}
+
+.RegisterUserPassword input {
+  display: block;
+  width: calc(100% - 25px);
+}
+
+#LoginForm input[type="submit"] {
+  margin-top: 10px;
+}
+
+.CheckUsersForm {
+  margin-top: 10px;
+  padding: 5px;
+  max-height: 200px;
+  overflow-y: auto;
+  border-radius: 20px;
+  border: 1px solid;
+  border-color: #2a2b2e;
+}
+
+/*input {
+  padding-left: 10px;
+  height: 30px;
+  border-radius: 0.25rem;
+}*/
+.AppContainer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+}
+
+.Sidebar {
+  background-color: #2e2f35;
+  padding: 0px 10px 10px 10px;
+  border-right: #2a2b2e;
+  border-right-style: inset;
+  border-width: 1px;
+  width: 30vw;
+}
+
+.Sidebar .title {
+  font-family: "Abril Fatface";
+  font-size: xx-large;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  height: 51px;
+}
+
+.Sidebar .SidebarInputContainer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 35px;
+  margin-bottom: 20px;
+}
+
+.Sidebar .SidebarInputContainer input {
+  height: 17px;
+  width: 100%;
+  border: none;
+  outline: none;
+  margin-right: 10px;
+  background-color: #33333a;
+}
+
+.Sidebar .SidebarInputContainer div {
+  padding: 10px;
+  height: 17px;
+  width: 17px;
+  cursor: pointer;
+  color: #880e4f;
+}
+
+.Sidebar .ChatsContainer {
+  height: calc(100vh - 126px);
+  overflow-y: auto;
+}
+
+.Sidebar .ChatsContainer .ChatPreview {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 10px;
+  margin: 10px 0 0 0;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.Sidebar .ChatsContainer .ChatPreview:hover {
+  background-color: #323238;
+}
+
+.Sidebar .ChatsContainer .ChatPreview.selected {
+  background-color: #292a30;
+}
+
+.Sidebar .ChatsContainer .ChatPreview .ChatPreviewImage {
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.Sidebar .ChatsContainer .ChatPreview .ChatPreviewName {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.Main {
+  height: 100vh;
+  width: 70vw;
+  background-color: #2e2f35;
+}
+
+.Main .Header {
+  border-radius: 10px 10px;
+  -webkit-box-shadow: 0.25px 0.25px 5px #0000004b;
+          box-shadow: 0.25px 0.25px 5px #0000004b;
+  margin-left: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  top: 10px;
+  right: 10px;
+  position: absolute;
+  background-color: #2e2f35;
+  height: 51px;
+}
+
+.Main .Header .ChatName {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.Main .Header .icon {
+  margin-right: 10px;
+}
+
+.Main .MessagesContainer {
+  padding: 10px 30px 0 30px;
+  height: calc(100vh - 67px);
+  overflow-y: auto;
+}
+
+.Main .MessagesContainer .Message {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 0 0 1px;
+}
+
+.Main .MessagesContainer .Message .ProfilePicture {
+  visibility: hidden;
+  border-radius: 50%;
+  margin-top: auto;
+  margin-right: 5px;
+  width: 30px;
+  height: 30px;
+}
+
+.Main .MessagesContainer .Message div .MessageAuthor {
+  font-size: 15px;
+  display: inline;
+}
+
+.Main .MessagesContainer .Message div div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.Main .MessagesContainer .Message div div .MessageContent {
+  border: 1.5px solid;
+  border-color: #2a2b2e;
+  background-color: #33333a;
+  border-radius: 0 20px 20px 0;
+  padding: 7px;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  max-width: 35vw;
+}
+
+.Main .MessagesContainer .Message:hover .DeleteMessage {
+  visibility: visible;
+}
+
+.Main .MessagesContainer .Message.LastMessage {
+  margin: 0 0 25px;
+}
+
+.Main .MessagesContainer .Message.FirstMessage .ProfilePicture {
+  visibility: visible;
+}
+
+.Main .MessagesContainer .Message.LastMessage .MessageContent {
+  border-bottom-left-radius: 20px 20px;
+}
+
+.Main .MessagesContainer .Message.FirstMessage .MessageContent {
+  border-top-left-radius: 20px 20px;
+}
+
+.Main .MessagesContainer .SelfMessage {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 0 0 3px;
+}
+
+.Main .MessagesContainer .SelfMessage button.DeleteMessage {
+  pointer-events: auto;
+  visibility: hidden;
+  color: grey;
+  background-color: #33333a;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: auto;
+  padding: 10px;
+  border-radius: 50%;
+  border: none;
+  outline: none;
+}
+
+.Main .MessagesContainer .SelfMessage button.DeleteMessage:hover {
+  background-color: #323238;
+}
+
+.Main .MessagesContainer .SelfMessage .MessageContent {
+  background-color: #33333a;
+  padding: 7px;
+  border-radius: 20px 0 0 20px;
+  margin-left: 5px;
+  max-width: 35vw;
+}
+
+.Main .MessagesContainer .SelfMessage .ProfilePicture {
+  visibility: hidden;
+  border-radius: 50%;
+  margin-top: auto;
+  margin-left: 5px;
+  width: 30px;
+  height: 30px;
+}
+
+.Main .MessagesContainer .SelfMessage:hover .DeleteMessage {
+  visibility: visible;
+}
+
+.Main .MessagesContainer .SelfMessage.LastMessage {
+  margin: 0 0 20px;
+}
+
+.Main .MessagesContainer .SelfMessage.FirstMessage .ProfilePicture {
+  visibility: visible;
+}
+
+.Main .MessagesContainer .SelfMessage.LastMessage .MessageContent {
+  border-bottom-right-radius: 20px 20px;
+}
+
+.Main .MessagesContainer .SelfMessage.FirstMessage .MessageContent {
+  border-top-right-radius: 20px 20px;
+}
+
+.Main .Bottom {
+  width: calc(70vw - 60px);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 0 30px 0 30px;
+}
+
+.Main .Bottom .MessageInput {
+  padding: 10px;
+  width: 100%;
+  height: 30px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.Main .Bottom .MessageInput .UploadImageIcon {
+  margin: auto 10px auto 0;
+  color: grey;
+  cursor: pointer;
+}
+
+.Main .Bottom .MessageInput .UploadImageIcon:hover {
+  color: #777777;
+}
+
+.Main .Bottom .MessageInput input {
+  border-radius: 20px;
+  background-color: #33333a;
+  border: none;
+  outline: none;
+}
+
+.Main .Bottom .SendMessageIcon {
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-right: 15px;
+  color: #880e4f;
+  cursor: pointer;
+}
+/*# sourceMappingURL=style.css.map */

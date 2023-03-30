@@ -123,8 +123,10 @@ pre {
   height: -webkit-min-content;
   height: -moz-min-content;
   height: min-content;
+  max-width: 400px;
   padding: 25px;
   display: none;
+  z-index: 5;
 }
 
 .modal.active {
@@ -338,6 +340,7 @@ pre {
 }
 
 .Sidebar.TopSidebar {
+  width: 30vw;
   padding: 0;
   border-right: #2a2b2e;
   border-right-style: inset;
@@ -358,13 +361,13 @@ pre {
   background-color: #33333a;
   width: 30vw;
   border-bottom: 1px solid #2a2b2e;
-  margin-bottom: 40px;
+  margin-bottom: 50px;
 }
 
 .Sidebar.TopSidebar.ChatInfo .ChatImage .Image {
   padding: 1px;
-  -webkit-transform: translate(calc(15vw - 45px), calc(40vh - 115px));
-          transform: translate(calc(15vw - 45px), calc(40vh - 115px));
+  -webkit-transform: translate(calc(15vw - 45px), calc(30vh - 45px));
+          transform: translate(calc(15vw - 45px), calc(30vh - 45px));
   width: 90px;
   height: 90px;
   border-radius: 50%;
