@@ -66,8 +66,10 @@ class Message extends React.Component {
                     <button className={`fa-solid fa-trash ${styles.DeleteMessage}`}></button>
                     <TextFormatter className={styles.MessageContent} text={MessageContent}/>
 
-                    <img src={image} alt='I told you this could happen!'  className={styles.ProfilePicture}></img>
-
+                    <img src={image || 'data:image/gif;'} 
+                        alt='I told you this could happen!' 
+                        className={styles.ProfilePicture}
+                        onError={({currentTarget})=>currentTarget.src='/media/Account/user.png'}/>
                 </div>
             )
         }

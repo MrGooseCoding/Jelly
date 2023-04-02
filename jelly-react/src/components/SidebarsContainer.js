@@ -41,7 +41,7 @@ class SidebarsContainer extends React.Component {
         return (<div className={styles.SidebarsContainer}>
             <Sidebar className={styles.ChatInfo} active={this.props.activeChatInfo} top={true}>
                 <div className={styles.ChatImage}>
-                    <img src={this.props.selectedChat.image} className={styles.Image} 
+                    <img src={this.props.selectedChat.image || 'data:image/gif;'} className={styles.Image} 
                         onError={({currentTarget})=>currentTarget.src='/media/Account/user.png'}/>
 
                 </div>
