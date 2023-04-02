@@ -1,13 +1,9 @@
-from django.shortcuts import get_object_or_404
-from rest_framework.decorators import permission_classes, api_view
+from rest_framework.decorators import permission_classes
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 from django.contrib.auth.models import User
-from django.utils.decorators import method_decorator
-from django.views.decorators.csrf import csrf_protect
-from django.contrib.auth import authenticate, login
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate
 from rest_framework.authtoken.models import Token
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication, TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
@@ -28,8 +24,8 @@ class AccountViewSet(ModelViewSet):
         try:
             account = Account.objects.get(user__id=request.user.id)
             return Response(AccountSerializer(account).data)
-        except TypeError:
-            return Response({'status':'User not logged in'})
+        except Exception as e:
+            return Response({'status':e})
  
     def create(self, request): # Remember to test crsf protection on this view
         data = json.loads(request.data['account'])
@@ -88,64 +84,5 @@ class AccountViewSet(ModelViewSet):
         user_already_exists = Account.objects.filter(user__username=request.data['username']).exists()
         return Response({'data':user_already_exists})
 
-class ChatViewSet(ModelViewSet):
-    queryset = Chat.objects.all()
-    serializer_class = ChatSerializer
-    authentication_classes = [TokenAuthentication, SessionAuthentication, BasicAuthentication]
-
-    @permission_classes([IsAuthenticated])
-    def retrieve(self, request):
-        print(request.user.username)
-        chat = Account.objects.get(user__username=request.user.username).chat_set.all()
-        return Response(ChatSerializer(chat, many=True).data)
-
-    @permission_classes([IsAuthenticated])
-    def create(self, request):
-        print(request.data)
-        print('Members:')
-        data = json.loads(request.data['chat'])
-        print(json.loads(request.data['chat'])['members'])
-        print('User:')
-        print(request.user.username)
-        account = Account.objects.get(user__username=request.user.username)
-        chatData = {"members": [], "name": data['name'], "description": data['description'], "image": None} 
-
-        for username in data['members']:
-            print(username)
-            account = get_object_or_404(Account, user__username=username)
-            if username != request.user.username and username not in chatData['members']:  
-                chatData["members"].append(account)
-
-        if len(chatData['members']) == 0:
-            return Response({'status':'Invalid Members'})
-
-        chatData['members'].append(Account.objects.get(user__username=request.user.username))
-
-        if len(chatData['name']) == 0:
-            return Response({'Invalid Name'})
-
-        chat = Chat(name=chatData['name'], description=chatData['description'], image=chatData['image'])
-        chat.save()
-        chat.members.set(chatData['members'])
-        chat.admins.set([account])
-        return Response({'data': ChatSerializer(chat).data})
-
-    @action(detail=True)
-    @permission_classes([IsAuthenticated])
-    def update_image(self, request):
-        print(request.user)
-        print(request.data)
-        account = Account.objects.get(user=request.user)
-        chat = Chat.objects.get(pk=int(request.data['chat_id']))
-        print(ChatSerializer(chat).data)
-        if not account in chat.members.all():
-            return Response({'status':'Account not member of chat'})
-        try:
-            Image = request.data['image']
-        except KeyError:
-            return Response({'status': 'Request has no resource file attached'})
-        chat.image = Image
-        chat.save()
-        return Response(ChatSerializer(chat).data)
-
-    
+    #@action(methods=['POST'])
+    #def edit(self, request):
