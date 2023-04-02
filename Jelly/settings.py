@@ -28,7 +28,7 @@ SECRET_KEY  = get_random_secret_key()
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'jelly.leal.me']
+ALLOWED_HOSTS = ['127.0.0.1', 'jelly.leal.me', 'trevor.leal.me']
 CSRF_TRUSTED_ORIGINS = ["http://jelly.leal.me"]
 
 
@@ -157,6 +157,7 @@ ASGI_APPLICATION = 'Jelly.asgi.application'
 CHANNEL_LAYERS = {
     'default': {
         'BACKEND':'channels_redis.core.RedisChannelLayer',
+        #'BACKEND': 'channels.layers.InMemoryChannelLayer',
         #"ROUTING":"Jelly.routing.websocket_urlpatterns",
         "CONFIG": {
             "hosts": [('127.0.0.1', 6379)]

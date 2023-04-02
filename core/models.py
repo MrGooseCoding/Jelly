@@ -31,7 +31,7 @@ class Chat(models.Model):
     image = models.ImageField(upload_to=get_image_path, blank=True, null=True)
 
     def __str__(self):
-        return self.name
+        return f'{self.name} | {self.id}'
 
 class Message(models.Model):
     chat = models.ForeignKey(Chat, null=True, on_delete=models.CASCADE, related_name='chat')
