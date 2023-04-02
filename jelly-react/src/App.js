@@ -113,7 +113,7 @@ class App extends React.Component {
       this.state.chatSocket.close();
     } 
 
-    let url = `ws://${window.location.host}/ws/${chat_id}/${this.state.userToken}/`
+    let url = `wss://${window.location.host}/ws/${chat_id}/${this.state.userToken}/`
 
     let self = this
 
