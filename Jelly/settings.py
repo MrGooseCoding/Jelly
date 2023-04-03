@@ -29,7 +29,7 @@ SECRET_KEY  = get_random_secret_key()
 DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1', 'jelly.leal.me', 'trevor.leal.me']
-CSRF_TRUSTED_ORIGINS = ["http://jelly.leal.me"]
+CSRF_TRUSTED_ORIGINS = ["https://jelly.leal.me"]
 
 
 # Application definition
