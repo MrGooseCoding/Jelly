@@ -1,8 +1,18 @@
 import React from 'react'
 import styles from '../style.module.css'
 import TextFormatter from './TextFormatter'
+import Banner from './Banner'
 
 class Message extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {activeBanner: false}
+    }
+
+    onProfilePictureClick = () => {
+        console.log('Click')
+        this.setState({activeBanner: (this.state.activeBanner)?false:true})
+    }
 
     render() {
         const FirstMessage = (this.props.LastMessageData)?this.props.LastMessageData.author.id!==this.props.MessageData.author.id:true
@@ -15,17 +25,29 @@ class Message extends React.Component {
                 return (html)
             } 
         } 
+        var Author = this.props.MessageData.author
+        var image = Author.image
+        var object = {
+            image: Author.image,
+            name: Author.user.first_name,
+            subname: '@'+Author.user.username,
+            description: Author.description
+        }
 
-        if (!this.props.MessageData.author.image) {
-            var image = 'http://trevor.leal.me:8080/media/Account/user.png'
-        } else {
-            var image = this.props.MessageData.author.image
-        } 
-
+        console.log(Author.image)
         if (!SelfMessage) {
             return (
                 <div className={`${styles.Message} ${(LastMessage)?styles.LastMessage:null} ${(FirstMessage)?styles.FirstMessage:null}`}>
-                    <img src={image} alt='I told you this could happen!' className={`${styles.ProfilePicture}`}/>
+                    <img src={image || 'data:image/gif;' } alt='I told you this could happen!' className={`${styles.ProfilePicture}`} 
+                        onClick={this.onProfilePictureClick}
+                        onError={({currentTarget})=>currentTarget.src='/media/Account/user.png'}/>
+                    
+                    <Banner
+                        active={this.state.activeBanner}
+                        object={object}>
+                        <div></div>
+                    </Banner>
+
                     <div>
                         {Check(FirstMessage, <div className={styles.MessageAuthor}>{this.props.MessageData.author.user.username}</div>)} 
 
@@ -44,8 +66,10 @@ class Message extends React.Component {
                     <button className={`fa-solid fa-trash ${styles.DeleteMessage}`}></button>
                     <TextFormatter className={styles.MessageContent} text={MessageContent}/>
 
-                    <img src={image} alt='I told you this could happen!'  className={styles.ProfilePicture}></img>
-
+                    <img src={image || 'data:image/gif;'} 
+                        alt='I told you this could happen!' 
+                        className={styles.ProfilePicture}
+                        onError={({currentTarget})=>currentTarget.src='/media/Account/user.png'}/>
                 </div>
             )
         }

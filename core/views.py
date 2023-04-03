@@ -27,11 +27,13 @@ class app(TemplateView):
     template_name = "index.html"
 
     def get(self, request):
-        #try:
+        try:
             token = request.COOKIES.get('userToken', None)
+            print(token)
             if not token:
                 return redirect('/') 
             Token.objects.get(key=token).user
             return render(request, self.template_name)
-        #except:
-        #    return redirect('/login/')
+        except Exception as e:
+            print(e)
+            return redirect('/login/')

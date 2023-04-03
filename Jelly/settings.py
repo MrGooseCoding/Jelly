@@ -28,7 +28,8 @@ SECRET_KEY  = get_random_secret_key()
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['trevor.leal.me']
+ALLOWED_HOSTS = ['127.0.0.1', 'jelly.leal.me', 'trevor.leal.me']
+CSRF_TRUSTED_ORIGINS = ["http://jelly.leal.me"]
 
 
 # Application definition
@@ -132,6 +133,8 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'core/static'),
     os.path.join(BASE_DIR, 'jelly-react/build/static')
@@ -153,6 +156,11 @@ ASGI_APPLICATION = 'Jelly.asgi.application'
 
 CHANNEL_LAYERS = {
     'default': {
-        'BACKEND':'channels.layers.InMemoryChannelLayer'
+        'BACKEND':'channels_redis.core.RedisChannelLayer',
+        #'BACKEND': 'channels.layers.InMemoryChannelLayer',
+        #"ROUTING":"Jelly.routing.websocket_urlpatterns",
+        "CONFIG": {
+            "hosts": [('127.0.0.1', 6379)]
+        } 
     } 
 }

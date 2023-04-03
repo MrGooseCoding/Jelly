@@ -1,0 +1,10 @@
+__pycache__
+
+jelly-react/.gitignore
+
+media/Account/*/
+media/Chat/*/
+
+static/*
+
+db.sqlite3

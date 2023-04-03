@@ -9,12 +9,16 @@ import datetime
 
 # Create your models here.
 
+def get_account_image_path(instance, filename):
+    return '/'.join([type(instance).__name__, str(instance.user.id), filename])
+
 def get_image_path(instance, filename):
     return '/'.join([type(instance).__name__, str(instance.id), filename])
 
 class Account(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
-    image = models.ImageField(upload_to=get_image_path, blank=True, null=True)
+    image = models.ImageField(upload_to=get_account_image_path, blank=True, null=True)
+    description = models.CharField(blank=True, max_length=200)
 
     def __str__(self):
         return f"{self.user.username} | {self.user.id}"
@@ -23,10 +27,11 @@ class Chat(models.Model):
     name = models.CharField(max_length=42, blank=True)
     description = models.CharField(max_length=100, blank=True, null=True)  #Blank and null are true because there are some chats old that dont have description 
     members = models.ManyToManyField(Account)
+    admins = models.ManyToManyField(Account, related_name='chat_admins')
     image = models.ImageField(upload_to=get_image_path, blank=True, null=True)
 
     def __str__(self):
-        return self.name
+        return f'{self.name} | {self.id}'
 
 class Message(models.Model):
     chat = models.ForeignKey(Chat, null=True, on_delete=models.CASCADE, related_name='chat')

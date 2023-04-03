@@ -25,7 +25,7 @@ class Main extends React.Component {
 
                 <div className={styles.Header}>
                     <p className={styles.ChatName}>{Chat.name}</p>
-                    <div class={`fa-solid fa-ellipsis-vertical ${styles.icon}`}></div>
+                    <div class={`fa-solid fa-compass ${styles.icon} ${styles.compassIcon}`} onClick={this.props.toggleChatInfo}></div>
                     <div class={`fa-solid fa-magnifying-glass ${styles.icon} `}></div>
                 </div>
 

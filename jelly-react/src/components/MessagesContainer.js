@@ -21,7 +21,7 @@ class MessagesContainer extends React.Component {
     render () {
         return (
             <div className={styles.MessagesContainer}>
-                <div style={{height: '55px',}}></div>
+                <div style={{height: '70px',}}></div>
                 {this.props.Messages.map((MessageData, index, elements)=>{
                         return (<Message key={MessageData.id} MessageData={MessageData} User={this.props.Account} LastMessageData={elements[index-1]} NextMessageData={elements[index + 1]}/>)
                 })}
