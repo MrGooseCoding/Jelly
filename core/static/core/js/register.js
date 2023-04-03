@@ -120,12 +120,15 @@ $('document').ready(()=>{
 
     $('#RegisterForm').submit(function (e) {
         e.preventDefault();
-        var account = JSON.stringify(User)
+        var account = $.extend(true, {}, User);
+        account.image = ''
         var imageInput = document.getElementsByClassName('ProfilePictureInput')[0]
         User.image = imageInput.files[0]
         formdata = new FormData()
         formdata.append('image', User.image)
         formdata.append('csrfmiddlewaretoken', csrftoken)
+        console.log(csrftoken)
+        console.log(account)
         $.post('/api/account/create/', {csrfmiddlewaretoken:csrftoken, account:account}, 
             function(data) { 
                 if (User.image != undefined) {
