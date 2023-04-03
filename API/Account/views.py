@@ -28,7 +28,7 @@ class AccountViewSet(ModelViewSet):
             return Response({'status':e})
  
     def create(self, request): # Remember to test crsf protection on this view
-        data = json.loads(request.data['account'])
+        data = request.data['account']
         user_already_exists = Account.objects.filter(user__username=data['user']['username']).exists()
         username_regex = r'^[0-9a-zA-Z._+]+$'
         if not re.fullmatch(username_regex, data['user']['username'].strip()) or user_already_exists:
@@ -43,7 +43,10 @@ class AccountViewSet(ModelViewSet):
         if data['user']['password2'].strip() != data['user']['password1'].strip():
             return Response({'status':'Invalid password2'})
 
-        user = User(username = data['user']['username'].strip(), first_name=data['user']['first_name'], password=data['user']['password1'])
+        #return Response({'password':data['user']['password1']})
+        user = User(username = data['user']['username'], first_name=data['user']['first_name'])
+        user.save()
+        user.set_password(data['user']['password1'])
         user.save()
         account = Account(user = user)
         account.save()
