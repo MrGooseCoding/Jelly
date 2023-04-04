@@ -31,19 +31,25 @@ class AccountViewSet(ModelViewSet):
         data = request.data['account']
         user_already_exists = Account.objects.filter(user__username=data['user']['username']).exists()
         username_regex = r'^[0-9a-zA-Z._+]+$'
+
+        user_serializer = UserSerializer(data={
+            "username":data['user']['username'].strip(),
+            "first_name":data['user']['username'].strip(),
+            "password":data['user']['password1'],
+            "email":""
+        })
+
         if not re.fullmatch(username_regex, data['user']['username'].strip()) or user_already_exists:
             return Response({'status':'Invalid username'})
 
-        if len(data['user']['first_name'].strip()) < 1:
-            return Response({'status':'Invalid first_name'})
-
-        if len(data['user']['password1'].strip()) < 8:
-            return Response({'status':'Invalid password1'})
-
-        if data['user']['password2'].strip() != data['user']['password1'].strip():
+        if data['user']['password2'] != data['user']['password1']:
             return Response({'status':'Invalid password2'})
 
-        #return Response({'password':data['user']['password1']})
+        user_valid = user_serializer.is_valid()
+
+        if not user_valid:
+            return Response({'status':user_serializer.errors})
+
         user = User(username = data['user']['username'], first_name=data['user']['first_name'])
         user.save()
         user.set_password(data['user']['password1'])

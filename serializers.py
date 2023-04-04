@@ -4,12 +4,14 @@ from django.contrib.auth.models import User
 from core.models import Account, Chat, Message
 
 class UserSerializer(serializers.ModelSerializer):
-    username = serializers.CharField(max_length=150)
+    username = serializers.CharField(required=True, max_length=150)
+    password = serializers.CharField(required=True, min_length=8)
+    first_name = serializers.CharField(required=True, min_length=1, max_length=150)
 
     class Meta:
         model = User
-        fields = ('id', 'username', 'first_name', 'email', 'is_active', 'date_joined')
-        #extra_kwargs = {'password': {'write_only': True}} 
+        fields = ('id', 'username', 'first_name', 'email', 'is_active', 'date_joined', 'password')
+        extra_kwargs = {'password': {'write_only': True}} 
 
     def update(self, instance, validated_data):
         instance.username = validated_data.get('username', instance.username)
@@ -20,6 +22,8 @@ class UserSerializer(serializers.ModelSerializer):
 
 class AccountSerializer(serializers.ModelSerializer):
     user = UserSerializer(many=False, read_only=True)
+    description = serializers.CharField(max_length=200)
+    image = serializers.ImageField(read_only=True)
 
     class Meta:
         model = Account
@@ -30,9 +34,19 @@ class AccountSerializer(serializers.ModelSerializer):
 
 class ChatSerializer(serializers.ModelSerializer):
     members = AccountSerializer(many=True)
+    image = serializers.ImageField(required=False)
+
     class Meta:
         model=Chat
         fields=('__all__')
+
+    def update(self, instance, validated_data:dict):
+        instance.name = validated_data.get('name', instance.name)
+        instance.description = validated_data.get('description', instance.description)
+        return instance
+
+    def create(self, data):
+        return Chat(**data)
 
 class MessageSerializer(serializers.ModelSerializer):
     author = AccountSerializer(many=False, read_only=True)
