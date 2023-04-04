@@ -5,13 +5,12 @@ from core.models import Account, Chat, Message
 
 class UserSerializer(serializers.ModelSerializer):
     username = serializers.CharField(required=True, max_length=150)
-    password = serializers.CharField(required=True, min_length=8)
+    password = serializers.CharField(required=True, min_length=8, write_only=True)
     first_name = serializers.CharField(required=True, min_length=1, max_length=150)
 
     class Meta:
         model = User
         fields = ('id', 'username', 'first_name', 'email', 'is_active', 'date_joined', 'password')
-        extra_kwargs = {'password': {'write_only': True}} 
 
     def update(self, instance, validated_data):
         instance.username = validated_data.get('username', instance.username)
