@@ -129,10 +129,15 @@ $('document').ready(()=>{
         formdata.append('csrfmiddlewaretoken', csrftoken)
         console.log(csrftoken)
         console.log(account)
-        $.post('/api/account/create/', {csrfmiddlewaretoken:csrftoken, account:account}, 
-            function(data) { 
+        $.ajax({
+            type:"POST",
+            url:'/api/account/create/', 
+            data:JSON.stringify({csrfmiddlewaretoken:csrftoken, account:account}), 
+            contentType: "application/json; charset=utf-8;",
+            success:function(data) { 
                 if (User.image != undefined) {
-                    document.cookie = `userToken=${data['token']}; domain=${window.location.host};path=/;`
+                    var hostname = window.location.hostname
+                    document.cookie = `userToken=${data['token']}; domain=${hostname.split('.')[1]}.${hostname.split('.')[2]}; path=/;`
                     $.ajax({
                         url: '/api/account/update_image/',
                         type:'POST',
@@ -144,6 +149,6 @@ $('document').ready(()=>{
                     })
                 } 
             }
-        )
+        })
     })
 });
