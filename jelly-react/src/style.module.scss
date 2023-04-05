@@ -724,3 +724,28 @@ pre {
     max-width: 200px;
   }
 }
+
+.Notification {
+  position: absolute;
+  padding: 10px;
+  border-radius: 20px;
+  left: 50%;
+  top: 10px;
+  transform: translate(-50%, calc(-100% - 21px));
+  background-color: $primary-color-2;
+  box-shadow: 0 0 10px 1px #0000004b;
+  z-index: 6;
+  display: flex;
+  transition: 0.5s transform;
+
+  &.active {
+    transform: translate(-50%, 0);
+  }
+
+  img {
+    width:40px;
+    height:40px;
+    border-radius: 10px;
+    margin-right: 5px;
+  }
+}

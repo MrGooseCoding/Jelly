@@ -16,7 +16,6 @@ class Banner extends React.Component{
         */
 
         var object = this.props.object
-        console.log('Object:',this.props.object)
         return <div className={`${styles.Banner} ${(this.props.active)?styles.active:''}`}>
             <div className={styles.bannerTop}>
                 <img src={`${object.image}`} alt='I told you this could happen!' className={`${styles.Picture}`}

@@ -5,6 +5,7 @@ import React from 'react'
 import $ from 'jquery';
 import Cookie from 'js-cookie'
 import SidebarsContainer from './components/SidebarsContainer'
+import Notification from './components/Notification';
 
 class App extends React.Component {
   constructor(props){
@@ -64,16 +65,37 @@ class App extends React.Component {
       Messages: [
         {id: 1, author: {id:1, user:{username:'Loading...'}, image:null}, content:'Loading...'},
       ],
+      NotificationData: {
+        message: {id: 1, author: {id:1, user:{username:'Loading...'}, image:null}, content:'Loading...'},
+        chat: {id: 1,
+        members: [{
+          id: 1,
+          user: {
+            id: 1,
+            username: "Loading...",
+            first_name: "Loading... ",
+            email: "Loading...",
+            is_active: true,
+            date_joined: "Loading..."
+          },
+          image: null
+        }],
+        name: "Loading...",
+        description: "Loading..",
+        image: null}
+      },
       
       chatSocket: null,
       activeCreateChatModal: false,
       activeChatInfo: false,
+      activeNotification: false,
     }
   }  
 
   componentDidMount() {
     this.getAccount();
     this.getChats();
+    this.connectWebsocket();
   } 
   
   getAccount = async function () {
@@ -90,7 +112,6 @@ class App extends React.Component {
       this.setState({Account:data})
     }
     )
-    //console.log(user)
   } 
 
   getChats = async function () {
@@ -108,12 +129,8 @@ class App extends React.Component {
     })
   }
 
-  connectWebsocket = async function (chat_id){
-    if (this.state.chatSocket){
-      this.state.chatSocket.close();
-    } 
-
-    let url = `wss://${window.location.host}/ws/${chat_id}/${this.state.userToken}/`
+  connectWebsocket = async function (){
+    let url = `ws://${window.location.host}/ws/${this.state.userToken}/`
 
     let self = this
 
@@ -121,11 +138,22 @@ class App extends React.Component {
 
     chatSocket.onmessage = function(e) {
       let data = JSON.parse(e.data)
+      console.log('Data:',data)
+      var message = data['message']
+
       if (data['type'] === 'recent_messages') {
         self.setState({Messages: data['message']})
       }
       if (data['type'] === 'message') {
-        self.setState({Messages: [...self.state.Messages, data['message']]})
+        console.log(message)
+        console.log('Chat:',self.state.selectedChat.id, message['chat'])
+
+        if (self.state.selectedChat.id != message['chat']) {
+          var chat = self.state.Chats.filter((value, index) => value.id == message['chat'])[0]
+          self.setState({NotificationData:{message:message, chat:chat}, activeNotification:true})
+        } else {
+          self.setState({Messages: [...self.state.Messages, message]})
+        }
       }
     } 
 
@@ -134,12 +162,17 @@ class App extends React.Component {
 
   changeSelectedChatCallback = (childData) => {
     this.setState({selectedChat: childData})
-    this.connectWebsocket(childData.id)
+    this.state.chatSocket.send(JSON.stringify({
+      "type":"recent_messages",
+      "chat_id":childData.id
+    }))
   }
 
   onMessageFormSubmit = (message) => {
     this.state.chatSocket.send(JSON.stringify({
-      "message": message
+      "type":"message",
+      "message":message,
+      "chat_id":this.state.selectedChat.id
     }))
   } 
 
@@ -161,7 +194,9 @@ class App extends React.Component {
     var active = this.state.activeCreateChatModal
     if (!document.getElementById('CreateChatModal').contains(e.target) && active){
       toggleCreateChatModal()
-
+    }
+    if (!document.getElementById('notification').contains(e.target) && this.state.activeNotification) {
+      this.setState({activeNotification:false})
     }
   } 
 
@@ -170,6 +205,7 @@ class App extends React.Component {
     document.title="Jelly"
     return (
       <div className={`${styles.AppContainer}`} onClick={this.onAppClickEvent}>
+        <Notification message={this.state.NotificationData.message} chat={this.state.NotificationData.chat} active={this.state.activeNotification}></Notification>
         <SidebarsContainer
           Account={this.state.Account}
           Chats={this.state.Chats} 

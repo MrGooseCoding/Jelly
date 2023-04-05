@@ -768,4 +768,37 @@ pre {
   border-radius: 10px;
   max-width: 200px;
 }
+
+.Notification {
+  position: absolute;
+  padding: 10px;
+  border-radius: 20px;
+  left: 50%;
+  top: 10px;
+  -webkit-transform: translate(-50%, calc(-100% - 21px));
+          transform: translate(-50%, calc(-100% - 21px));
+  background-color: #33333a;
+  -webkit-box-shadow: 0 0 10px 1px #0000004b;
+          box-shadow: 0 0 10px 1px #0000004b;
+  z-index: 6;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-transition: 0.5s -webkit-transform;
+  transition: 0.5s -webkit-transform;
+  transition: 0.5s transform;
+  transition: 0.5s transform, 0.5s -webkit-transform;
+}
+
+.Notification.active {
+  -webkit-transform: translate(-50%, 0);
+          transform: translate(-50%, 0);
+}
+
+.Notification img {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  margin-right: 5px;
+}
 /*# sourceMappingURL=style.module.css.map */
