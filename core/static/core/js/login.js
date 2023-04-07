@@ -15,14 +15,20 @@ $(function () {
         return cookieValue;
     }
     const csrftoken = getCookie('csrftoken');
+    function setCookie(cName, cValue, expDays) {
+        let date = new Date();
+        date.setTime(date.getTime() + (expDays * 24 * 60 * 60 * 1000));
+        const expires = "expires=" + date.toUTCString();
+        const hostname = window.location.hostname
+
+        document.cookie = cName + "=" + cValue + "; " + expires + `; domain=${hostname.split('.')[1]}.${hostname.split('.')[2]} path=/`;
+    }
 
     $('#LoginForm').on('submit',function(e) {
         e.preventDefault()
         $.post('/api/account/login/', {username: e.target.username.value, password: e.target.password.value, csrfmiddlewaretoken:csrftoken,}, 
             (data)=>{
-                var hostname = window.location.hostname
-                document.cookie = `userToken=${data['token']}; domain=${hostname.split('.')[1]}.${hostname.split('.')[2]}; path=/;`
-                
+                setCookie('userToken', data['token'], 30)
                 if (data['token']) {
                     var queryString = window.location.search
                     var params = new URLSearchParams(queryString)

@@ -1,6 +1,15 @@
 $('document').ready(()=>{
     const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value
 
+    function setCookie(cName, cValue, expDays) {
+        let date = new Date();
+        date.setTime(date.getTime() + (expDays * 24 * 60 * 60 * 1000));
+        const expires = "expires=" + date.toUTCString();
+        const hostname = window.location.hostname
+
+        document.cookie = cName + "=" + cValue + "; " + expires + `; domain=${hostname.split('.')[1]}.${hostname.split('.')[2]} path=/`;
+    }
+
     var User = {
         user: { 
             username: null,
@@ -144,9 +153,10 @@ $('document').ready(()=>{
             },
             contentType: "application/json; charset=utf-8;",
             success:function(data) { 
+                console.log(data['token'])
+                setCookie('userToken', data['token'], 30)
+
                 if (User.image != undefined) {
-                    var hostname = window.location.hostname
-                    document.cookie = `userToken=${data['token']}; domain=${hostname.split('.')[1]}.${hostname.split('.')[2]}; path=/;`
                     $.ajax({
                         url: '/api/account/update_image/',
                         type:'POST',
