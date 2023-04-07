@@ -15,6 +15,11 @@ body {
   background-color: #2e2f35;
 }
 
+a {
+  color: #880e4f;
+  cursor: pointer;
+}
+
 input[type="text"],
 input[type="password"] {
   width: 100%;
@@ -87,6 +92,51 @@ button.btnPurple.disabled {
   color: gray;
   cursor: not-allowed;
   pointer-events: none;
+}
+
+input[type="button"].shine,
+input[type="submit"].shine,
+button.shine {
+  background: -webkit-gradient(linear, left top, right bottom, from(#aa1e69), color-stop(#9c135c), to(#800d4a));
+  background: linear-gradient(to bottom right, #aa1e69, #9c135c, #800d4a);
+}
+
+input[type="button"].shine:before,
+input[type="submit"].shine:before,
+button.shine:before {
+  content: '';
+  position: absolute;
+  width: 100px;
+  height: 100%;
+  background-image: linear-gradient(120deg, rgba(255, 255, 255, 0) 30%, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0) 70%);
+  top: 0;
+  left: -100px;
+  -webkit-animation: shine 3s infinite linear;
+          animation: shine 3s infinite linear;
+}
+
+@-webkit-keyframes shine {
+  0% {
+    left: -100px;
+  }
+  20% {
+    left: 100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+@keyframes shine {
+  0% {
+    left: -100px;
+  }
+  20% {
+    left: 100%;
+  }
+  100% {
+    left: 100%;
+  }
 }
 
 .header {
@@ -456,6 +506,33 @@ pre {
   border-radius: 0 0.5rem 0.5rem 0;
 }
 
+.userDisplay .Picture {
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+}
+
+.userDisplay div.top {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.userDisplay div.top div.data {
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: 5px;
+  display: inline-block;
+}
+
+.userDisplay .description {
+  margin-top: 5px;
+  background-color: #33333a;
+  padding: 10px;
+  border-radius: 10px;
+  max-width: 200px;
+}
+
 .ChatDisplayForm {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -797,5 +874,20 @@ pre {
   margin-right: 15px;
   color: #880e4f;
   cursor: pointer;
+}
+
+.percentageBar {
+  width: 100%;
+  height: 30px;
+  overflow: hidden;
+  border-radius: 10px;
+  border: 2px solid #2a2b2e;
+  margin-top: 10px;
+}
+
+.percentageBar .bar {
+  width: 0;
+  height: 100%;
+  background-color: #880e4f;
 }
 /*# sourceMappingURL=style.css.map */

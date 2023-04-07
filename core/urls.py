@@ -8,5 +8,6 @@ urlpatterns = [
     path('login/', login),
     path('@app/', app.as_view()),
     path('api/', include('API.urls')),
-    path('', homepage)
+    path('', homepage),
+    path('account/@<str:username>/', account_view),
 ]

@@ -19,6 +19,10 @@
 <body>
     <form class="modal active" novalidate action="/register/" method="post" id="RegisterForm">
         {% csrf_token %}
+        <div>You already have an account? <a onclick="
+            const queryString = window.location.search
+            location.href = `${window.location.origin}/login/${queryString}`
+    ">Login</a></div>
         <div class="title">Register</div>
         <div class="container">
             <div class="slide 1 active">
@@ -52,7 +56,10 @@
             </div>
             <div class="slide 3">
                 Hm... He might have to check that everything is done correctly
+                <button type="submit" disabled style="display: none" aria-hidden="true"></button>
                 <input type="submit" value="Check!">
+                <div class="percentageBar"><div class="bar" id="uploadBar"></div></div>
+                <input type="hidden" name="joinUser" value="">
             </div>
         </div>
         <div class="modalButtons">

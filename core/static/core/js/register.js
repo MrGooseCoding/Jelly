@@ -128,11 +128,20 @@ $('document').ready(()=>{
         formdata.append('image', User.image)
         formdata.append('csrfmiddlewaretoken', csrftoken)
         console.log(csrftoken)
-        console.log(account)
+        console.log(account) 
+        var queryString = window.location.search
+        var params = new URLSearchParams(queryString)
+
+        if (params.has('joinUser')) {
+            document.forms[0].joinUser.value = params.get('joinUser')
+        }           
         $.ajax({
             type:"POST",
             url:'/api/account/create/', 
-            data:JSON.stringify({csrfmiddlewaretoken:csrftoken, account:account}), 
+            data:JSON.stringify({account:account}),
+            headers:{
+                'X-CSRFToken':csrftoken
+            },
             contentType: "application/json; charset=utf-8;",
             success:function(data) { 
                 if (User.image != undefined) {
@@ -145,10 +154,29 @@ $('document').ready(()=>{
                         data: formdata,
                         contentType: false, 
                         processData: false,
-                        success: function(data) {console.log('Success'); document.getElementById('RegisterForm').submit()} 
+                        xhr: function() {
+                                var xhr = new window.XMLHttpRequest();
+                                //Upload progress
+                                xhr.upload.addEventListener("progress", function(evt){
+                                if (evt.lengthComputable) {
+                                    var percentComplete = evt.loaded / evt.total;
+                                    $('#uploadBar').width(`${percentComplete*100}%`)
+                                    console.log(percentComplete);
+                                }
+                                }, false);
+                                return xhr;
+                            },
+                        success: function(data) {
+                            } 
+                    }).done(()=>{
+                        document.getElementById('RegisterForm').submit()
+
                     })
-                } 
-            }
+                } else {
+                    document.getElementById('RegisterForm').submit()
+
+                }
+            },
         })
     })
 });

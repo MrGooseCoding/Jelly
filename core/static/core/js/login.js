@@ -24,6 +24,11 @@ $(function () {
                 document.cookie = `userToken=${data['token']}; domain=${hostname.split('.')[1]}.${hostname.split('.')[2]}; path=/;`
                 
                 if (data['token']) {
+                    var queryString = window.location.search
+                    var params = new URLSearchParams(queryString)
+                    if (params.has('joinUser')) {
+                        document.forms[0].joinUser.value = params.get('joinUser')
+                    }
                     document.getElementById('LoginForm').submit()
                 }
                 document.getElementById('LoginForm').reset()
