@@ -21,7 +21,7 @@ $(function () {
         const expires = "expires=" + date.toUTCString();
         const hostname = window.location.hostname
 
-        document.cookie = cName + "=" + cValue + "; " + expires + `; domain=${hostname.split('.')[1]}.${hostname.split('.')[2]} path=/`;
+        document.cookie = cName + "=" + cValue + "; " + expires + `; domain=${hostname.split('.')[1]}.${hostname.split('.')[2]}; path=/;`;
     }
 
     $('#LoginForm').on('submit',function(e) {
