@@ -93,5 +93,38 @@ class AccountViewSet(ModelViewSet):
         user_already_exists = Account.objects.filter(user__username=request.data['username']).exists()
         return Response({'data':user_already_exists})
 
-    #@action(methods=['POST'])
-    #def edit(self, request):
+    @action(methods=['POST'], detail=True)
+    def edit(self, request):
+        """
+            Request data params are:
+                username: str/empty | The user's new username, leave empty to keep the original 
+                first_name: str/empty | The user's new first_name, leave empty to keep the original one
+                description: str/empty | The user's new description, leave empty to keep the original one
+            
+            The request must have a userToken auth param to identify the user
+        """
+
+        account = Account.objects.get(user=request.user)
+
+        if not request.data['username'].strip() == request.user.username:
+            if User.objects.filter(username=request.data['username'].strip()).exists():
+                return Response({'status':'Username is already taken'})
+
+        account_serializer = AccountSerializer(data={
+            "description":request.data['description']
+        })
+
+        user_serializer = UserSerializer(data={
+            "username":request.data['username'],
+            "first_name":request.data['first_name'],
+            "email":"",
+            "password":"SomeDummyPass"
+        })
+
+        if not user_serializer.is_valid() or not account_serializer.is_valid():
+            return Response({'account': account_serializer.errors, 'user': user_serializer.errors})
+
+        print(request.data)
+        account = account_serializer.update(instance=account, validated_data=request.data)
+
+        return Response({'account': AccountSerializer(account).data})
