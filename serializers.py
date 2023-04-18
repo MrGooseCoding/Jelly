@@ -14,14 +14,14 @@ class UserSerializer(serializers.ModelSerializer):
 
     def update(self, instance, validated_data):
         instance.username = validated_data.get('username', instance.username)
-        instance.first_name = validated_data.get('first_name', instance.fist_name)
+        instance.first_name = validated_data.get('first_name', instance.first_name)
         instance.email = validated_data.get('email', instance.email)
         instance.save()
         return instance
 
 class AccountSerializer(serializers.ModelSerializer):
     user = UserSerializer(many=False, read_only=True)
-    description = serializers.CharField(max_length=200)
+    description = serializers.CharField(max_length=200, allow_null=True, allow_blank=True)
     image = serializers.ImageField(read_only=True)
 
     class Meta:
@@ -30,6 +30,13 @@ class AccountSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         return Account(**validated_data)  
+
+    def update(self, instance, validated_data):
+        instance.description = validated_data.get('description', instance.description)
+        print(instance.user)
+        UserSerializer(instance.user).update(instance=instance.user, validated_data=validated_data)
+        instance.save()
+        return instance
 
 class ChatSerializer(serializers.ModelSerializer):
     members = AccountSerializer(many=True)
