@@ -12,8 +12,8 @@ class App extends React.Component {
     super(props)
 
     this.state = {
-      userToken: '32eddfbc63bbae81017917e5d2a9ddc87bdeadf5',
-      //userToken: Cookie.get('userToken'),
+      //userToken: '32eddfbc63bbae81017917e5d2a9ddc87bdeadf5',
+      userToken: Cookie.get('userToken'),
       selectedChat: {
         "id": 1,
         "members": [{
@@ -101,7 +101,7 @@ class App extends React.Component {
   getAccount = async function () {
     $.ajax({ 
       method:'POST',
-      url:'http://trevor.leal.me:8000/api/account/get/',
+      url:'/api/account/get/',
       headers: {
         Authorization: `Token ${this.state.userToken}`, 
         "Access-Control-Allow-Origin": "*",
@@ -117,7 +117,7 @@ class App extends React.Component {
   getChats = async function () {
     $.ajax({
       method:'POST',
-      url:'http://trevor.leal.me:8000/api/chat/get/',
+      url:'/api/chat/get/',
       headers:{
         Authorization: `Token ${this.state.userToken}`, 
         "Access-Control-Allow-Origin": "*",
@@ -130,7 +130,7 @@ class App extends React.Component {
   }
 
   connectWebsocket = async function (){
-    let url = `ws://${window.location.host}/ws/${this.state.userToken}/`
+    let url = `wss://${window.location.host}/ws/${this.state.userToken}/`
 
     let self = this
 
