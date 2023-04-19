@@ -2,6 +2,7 @@ import React from 'react'
 import styles from '../style.module.css'
 import TextFormatter from './TextFormatter'
 import Banner from './Banner'
+import Image from './Image'
 
 class Message extends React.Component {
     constructor(props) {
@@ -38,10 +39,7 @@ class Message extends React.Component {
         if (!SelfMessage) {
             return (
                 <div className={`${styles.Message} ${(LastMessage)?styles.LastMessage:null} ${(FirstMessage)?styles.FirstMessage:null}`}>
-                    <img src={image || 'data:image/gif;' } alt='I told you this could happen!' className={`${styles.ProfilePicture}`} 
-                        onClick={this.onProfilePictureClick}
-                        onError={({currentTarget})=>currentTarget.src='/media/Account/user.png'}/>
-                    
+                    <Image src={image} classNames={styles.ProfilePicture} onClick={this.onProfilePictureClick} user/>
                     <Banner
                         active={this.state.activeBanner}
                         object={object}>
@@ -49,7 +47,7 @@ class Message extends React.Component {
                     </Banner>
 
                     <div>
-                        {Check(FirstMessage, <div className={styles.MessageAuthor}>{this.props.MessageData.author.user.username}</div>)} 
+                        {Check(FirstMessage, <div className={styles.MessageAuthor}>{this.props.MessageData.author.user.first_name}</div>)} 
 
                         <div>
                             <TextFormatter className={styles.MessageContent} text={MessageContent} />
@@ -65,11 +63,8 @@ class Message extends React.Component {
 
                     <button className={`fa-solid fa-trash ${styles.DeleteMessage}`}></button>
                     <TextFormatter className={styles.MessageContent} text={MessageContent}/>
-
-                    <img src={image || 'data:image/gif;'} 
-                        alt='I told you this could happen!' 
-                        className={styles.ProfilePicture}
-                        onError={({currentTarget})=>currentTarget.src='/media/Account/user.png'}/>
+                    
+                    <Image src={image} classNames={styles.ProfilePicture} onClick={this.onProfilePictureClick} user/>
                 </div>
             )
         }

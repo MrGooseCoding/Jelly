@@ -12,9 +12,9 @@ $focus-color: rgb(243, 243, 243);
 */
 @import url("https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300&display=swap");
 
-$border-color: rgb(42, 43, 46);
+$border-color: rgb(31, 31, 32);
 $primary-color: rgb(46, 47, 53);
-$primary-color-hover: rgb(50, 50, 56);
+$primary-color-hover: rgb(44, 44, 49);
 $primary-color-selected: rgb(41, 42, 48);
 $primary-color-2: rgb(51, 51, 58);
 $secundary-color: #880e4f;
@@ -41,7 +41,7 @@ body {
 
 input[type="text"],
 input[type="password"] {
-  width: 100%;
+  display: block;
   padding: 10px;
   border: none;
   outline: none;
@@ -133,7 +133,7 @@ pre {
   max-width: 400px;
   padding: 25px;
   display: none;
-  z-index: 5;
+  z-index: 10;
 
   &.active {
     opacity: 100%;
@@ -315,7 +315,6 @@ pre {
 
 .Sidebar {
   position: relative;
-  z-index: 1;
   background-color: $primary-color;
   padding: 0px 10px 10px 10px;
   border-right: $border-color;
@@ -346,7 +345,11 @@ pre {
         border-bottom: 1px solid $border-color;
 
         .Image {
+          display:flex;
+          background-color: $primary-color-2;
           padding: 1px;
+          text-align: center;
+          vertical-align: center;
           transform: translate(calc(15vw - 45px), calc(30vh - 45px));
           width: 90px;
           height: 90px;
@@ -358,6 +361,16 @@ pre {
       .ChatName {
         text-align: center;
       }
+
+      .ChatDescription {
+        margin-top: 5px;
+        background-color: $primary-color-2;
+        padding: 10px;
+        border-radius: 10px;
+        margin-left: 10px;
+        margin-right: 10px;
+      }
+
       .ChatMembers {
         max-height: 30vh;
         overflow-y: auto;
@@ -401,7 +414,7 @@ pre {
       .title {
         font-size: xxx-large;
       }
-      img {
+      img.userImage {
         float: right;
         margin-top: 10px;
         margin-left: auto;
@@ -666,6 +679,7 @@ pre {
       }
 
       input {
+        width: 100%;
         //width: calc(70vw - 100px);
         border-radius: 20px;
         background-color: $primary-color-2;
@@ -690,9 +704,9 @@ pre {
   border-radius: 10px;
   padding: 20px;
   background-color: $primary-color;
-  z-index: 2;
   transform: translate(0, 60px);
   opacity: 0;
+  z-index: 2;
   display: none;
 
   &.active {
@@ -725,6 +739,141 @@ pre {
   }
 }
 
+.userSettingsBanner{
+  position: absolute;
+  box-shadow: 0 0 10px 2px #0000004b;
+  border-radius: 10px;
+  padding: 10px;
+  background-color: $primary-color;
+  z-index: 7;
+  transform: rotate(-90deg);
+  //top: -80px;
+  display:flex;
+  left: calc(30vw - 210px);
+  top: -100%;
+
+  transition: all 1s ease-in-out;
+
+  &.active{
+    top: 0;
+    transform: rotate(0deg);
+    left: calc(30vw - 70px);
+    width: auto;
+    height: auto;
+  }
+  .sidebar {
+    position: relative;
+    padding-right: 10px;
+    border-right: 2px solid $border-color ;
+  }
+
+  .settings {
+    margin-left: 10px;
+  }
+}
+
+.userDisplay {
+  .userPicture {
+    display:block;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+  }
+
+  div.data {
+    display: flex;
+
+    div.text {
+      margin-top: auto;
+      margin-bottom: auto;
+      margin-left: 5px;
+      display: inline-block;
+    }
+    input[type="text"] {
+      padding: 2px;
+      background-color: $primary-color;
+      font-family: "Inter Tight", sans-serif;
+
+      &:focus {
+        background-color: $primary-color-2;
+      }
+      &.first_name {
+        font-size: large;
+        font-weight: bold;
+      }
+    }
+    div.username {
+      display: flex;
+    }
+  }
+
+  textarea {
+    outline: none;
+    width: calc(100% - 15px);
+    height: 200px;
+    resize: none;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: $primary-color-2;
+  }
+
+  input[type="button"] {
+    padding: 5px;
+  }
+
+  .error {
+    color:red;
+  }
+
+  .description {
+    margin-top: 5px;
+    background-color: $primary-color-2;
+    padding: 10px;
+    border-radius: 10px;
+    max-width: 200px;
+  }
+}
+
+.SettingsOption {
+  display: flex;
+  height: 30px;
+  margin: 5px;
+
+  .selectionBar {
+    border-radius: 10px;
+    background-color: $secundary-color;
+    width: 4px;
+    height: 20px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    visibility: hidden;
+  }
+
+  .option {
+    padding: 5px;
+    width: 100%;
+    border-radius: 5px;
+
+    &:hover {
+      background-color: $primary-color-hover;
+    }
+  }
+
+  &:hover .option {
+    box-shadow: 0 0 2px 1px #0000004b;
+  }
+
+  &.active .selectionBar {
+    visibility: visible;
+  }
+
+  &.active .option {
+    box-shadow: 0 0 2px 1px #0000004b;
+  }
+}
+
+
+
 .Notification {
   position: absolute;
   padding: 10px;
@@ -747,5 +896,22 @@ pre {
     height:40px;
     border-radius: 10px;
     margin-right: 5px;
+  }
+}
+
+.userLink {
+  bottom: 2px;
+  position: absolute; 
+  font-size: small;
+
+  input[type="text"]{
+    padding: 5px;
+    width: 90px;
+  }
+  input[type="button"] {
+    display: block;
+    padding: 5px;
+    border-radius: 5px;
+    background-color:rgb(65, 180, 65);
   }
 }
