@@ -130,9 +130,9 @@ class App extends React.Component {
   }
 
   connectWebsocket = async function (){
-    //let url = `wss://${window.location.host}/ws/${this.state.userToken}/`
+    let url = `wss://${window.location.host}/ws/${this.state.userToken}/`
 
-    let url = `ws://trevor.leal.me:8000/ws/${this.state.userToken}/`
+    //let url = `ws://trevor.leal.me:8000/ws/${this.state.userToken}/`
 
     let self = this
 
