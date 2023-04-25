@@ -130,7 +130,9 @@ class App extends React.Component {
   }
 
   connectWebsocket = async function (){
-    let url = `wss://${window.location.host}/ws/${this.state.userToken}/`
+    //let url = `wss://${window.location.host}/ws/${this.state.userToken}/`
+
+    let url = `ws://trevor.leal.me:8000/ws/${this.state.userToken}/`
 
     let self = this
 
@@ -145,12 +147,14 @@ class App extends React.Component {
         self.setState({Messages: data['message']})
       }
       if (data['type'] === 'message') {
-        console.log(message)
         console.log('Chat:',self.state.selectedChat.id, message['chat'])
 
         if (self.state.selectedChat.id != message['chat']) {
           var chat = self.state.Chats.filter((value, index) => value.id == message['chat'])[0]
-          self.setState({NotificationData:{message:message, chat:chat}, activeNotification:true})
+          self.setState({NotificationData:{message:message, chat:chat}, activeNotification:true}, () =>{
+            var options = {body: `${message['author']['user']['first_name']}: ${message['content']}`, icon:`http://trevor.leal.me:8000${message.author.image}`}
+            new window.Notification(`#${chat.name}`, options)
+          })
         } else {
           self.setState({Messages: [...self.state.Messages, message]})
         }

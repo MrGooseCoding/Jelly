@@ -70,7 +70,7 @@ class SidebarsContainer extends React.Component {
                 <div className={styles.top}>
                     <div className={styles.title}>Jelly</div>
                     <>  
-                        <Image src={this.props.selectedChat.image} user={true} classNames={styles.userImage} onClick={this.props.toggleUserSettingsBanner}/>
+                        <Image src={this.props.Account.image} user={true} classNames={styles.userImage} onClick={this.props.toggleUserSettingsBanner}/>
                         <UserSettingsBanner Account={this.props.Account} userToken={this.props.userToken} updateAccount={this.props.updateAccount} 
                             active={this.props.activeUserSettingsBanner}/>
                     </>

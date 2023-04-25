@@ -91,9 +91,23 @@ class UserSettingsBanner extends React.Component {
         clipboardDataEvt.setData('text/plain', `${window.location.origin}/account/@${this.props.Account.user.username}/`);
     }
 
+    requestNotificationPermission = () => {
+        console.log('HI')
+        Notification.requestPermission().then(result => console.log(result))
+        if (!("Notification" in window)) {
+            alert("This browser does not support desktop notification");
+        } else if (Notification.permission !== "denied") {
+            Notification.requestPermission().then((permission) => {
+                console.log(permission)
+            });
+        }
+
+    }
+
     render() {
         var first_name = this.props.Account.user.first_name
         var username = this.props.Account.user.username
+        console.log(this.props.Account.image)
         return <div className={`${styles.userSettingsBanner} ${(this.props.active)&&styles.active}`} id="userSettingsBanner">
         <div className={styles.sidebar}>
             <div className={styles.userDisplay}>
@@ -115,7 +129,7 @@ class UserSettingsBanner extends React.Component {
             <div className={`${styles.SettingsOption} ${(this.state.selectedOption===2)?styles.active:''}`}
                 onClick={()=>this.changeSelected(2)}>
                 <div className={styles.selectionBar}></div>
-                <div className={styles.option}>Friends</div>
+                <div className={styles.option}>Notification</div>
             </div>
 
             <div className={styles.userLink}>
@@ -158,7 +172,8 @@ class UserSettingsBanner extends React.Component {
                         <input type={'button'} className={styles.btnPurple} value="Save" onClick={this.onSaveButtonPress}/>
                     </div>
                 :<div>
-                    Comming soon
+                    <button id="enable">Enable notifications</button>
+                    <input className={styles.btnPurple} type="button" value="Click here to enable notifications!" onClick={this.requestNotificationPermission}/>
                 </div>
             }
         </div>
